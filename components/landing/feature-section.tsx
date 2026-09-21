@@ -3,14 +3,22 @@
 // components/landing/feature-section.tsx
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/language-context";
+import { Target, BarChart2, Sparkles, Trophy, FileText, Medal } from 'lucide-react';
 
 
 
 export default function FeatureSection() {
   const { t } = useLanguage();
-  
-  const icons = ["🎯", "📊", "📚", "🏆", "📝", "🏅"];
-  
+
+  const icons = [
+    <Target className="w-6 h-6 text-indigo-600" key="1" />,
+    <BarChart2 className="w-6 h-6 text-indigo-600" key="2" />,
+    <Sparkles className="w-6 h-6 text-indigo-600" key="3" />,
+    <Trophy className="w-6 h-6 text-indigo-600" key="4" />,
+    <FileText className="w-6 h-6 text-indigo-600" key="5" />,
+    <Medal className="w-6 h-6 text-indigo-600" key="6" />,
+  ];
+
   const features = t.features.cards.map((card, index) => ({
     ...card,
     icon: icons[index] || "✨",
@@ -19,7 +27,7 @@ export default function FeatureSection() {
   return (
     <section id="fitur" className="py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}

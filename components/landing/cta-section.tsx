@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/language-context";
+import { Rocket } from "lucide-react";
 
 export default function CtaSection() {
   const { t } = useLanguage();
@@ -11,7 +12,7 @@ export default function CtaSection() {
   return (
     <section className="pb-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -21,7 +22,7 @@ export default function CtaSection() {
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
               <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-2xl">
-                🚀
+                <Rocket className="h-7 w-7 text-white" />
               </div>
               <h2 className="text-3xl font-bold tracking-tight">
                 {t.cta.title}

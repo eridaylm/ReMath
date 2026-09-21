@@ -3,6 +3,7 @@
 // components/landing/popular-tests.tsx
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/language-context";
+import { Target, BarChart2, Sparkles, Trophy, FileText, Medal, BarChart3, Shapes, Calculator, Variable, Brain } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -16,8 +17,8 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, scale: 0.95, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     scale: 1,
     y: 0,
     transition: { type: "spring" as const, damping: 20, stiffness: 100 }
@@ -26,8 +27,14 @@ const itemVariants = {
 
 export default function PopularTests() {
   const { t } = useLanguage();
-  
-  const icons = ["🧮", "✖️", "📐", "🧠", "📈"];
+
+  const icons = [
+    <Calculator className="w-7 h-7 text-blue-400" key="1" />,
+    <Variable className="w-7 h-7 text-indigo-400" key="2" />,
+    <Shapes className="w-7 h-7 text-emerald-400" key="3" />,
+    <Brain className="w-7 h-7 text-purple-400" key="4" />,
+    <BarChart3 className="w-7 h-7 text-cyan-400" key="5" />,
+  ];
   const tests = t.popularTests.tests.map((test, index) => ({
     ...test,
     icon: icons[index] || "📝"
@@ -36,7 +43,7 @@ export default function PopularTests() {
   return (
     <section className="py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -56,7 +63,7 @@ export default function PopularTests() {
           </button>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

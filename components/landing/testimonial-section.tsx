@@ -16,8 +16,8 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: { type: "spring" as const, damping: 20, stiffness: 100 }
   },
@@ -29,7 +29,7 @@ export default function TestimonialSection() {
   return (
     <section className="py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -44,7 +44,7 @@ export default function TestimonialSection() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -58,9 +58,11 @@ export default function TestimonialSection() {
               className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
             >
               <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 font-bold text-white">
-                  {testimonial.name.charAt(0)}
-                </div>
+                <img
+                  src={testimonial.avatar}
+                  alt={testimonial.name}
+                  className="h-14 w-14 rounded-full object-cover"
+                />
                 <div>
                   <h3 className="font-semibold text-slate-900 dark:text-white">
                     {testimonial.name}

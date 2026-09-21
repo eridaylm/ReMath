@@ -16,8 +16,8 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, scale: 0.9, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     scale: 1,
     y: 0,
     transition: { type: "spring" as const, damping: 20, stiffness: 100 }
@@ -43,7 +43,7 @@ export default function HowItWorks() {
   return (
     <section id="cara-kerja" className="py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -58,7 +58,7 @@ export default function HowItWorks() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

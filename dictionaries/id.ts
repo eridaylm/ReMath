@@ -99,16 +99,19 @@ export const id = {
       {
         name: "Rizky Pratama",
         role: "Mahasiswa",
+        avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80",
         quote: "ReMath membantu saya mengetahui kelemahan saya di aljabar dan cara meningkatkannya. Hasilnya sangat detail.",
       },
       {
         name: "Salsa Anindita",
         role: "Pelajar",
+        avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
         quote: "Soalnya menantang tapi seru. Saya jadi lebih semangat belajar matematika setiap hari.",
       },
       {
         name: "Dimas Wahyu",
         role: "Guru",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
         quote: "Sebagai guru, ReMath sangat membantu untuk analisis kemampuan siswa secara objektif dan cepat.",
       },
     ]
