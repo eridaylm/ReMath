@@ -101,16 +101,19 @@ export const en: Dictionary = {
       {
         name: "Rizky Pratama",
         role: "Student",
+        avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80",
         quote: "ReMath helped me identify my weaknesses in algebra and how to improve. The results are very detailed.",
       },
       {
         name: "Salsa Anindita",
         role: "High School Student",
+        avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
         quote: "The questions are challenging but fun. I'm more motivated to study math every day.",
       },
       {
         name: "Dimas Wahyu",
         role: "Teacher",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
         quote: "As a teacher, ReMath is very helpful for analyzing student abilities objectively and quickly.",
       },
     ]
