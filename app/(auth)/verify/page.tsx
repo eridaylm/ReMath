@@ -33,6 +33,7 @@ function VerifyContent() {
   const [canResend, setCanResend] = useState(false);
   const [shake, setShake] = useState(false);
   const [verifying, setVerifying] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   // Countdown timer
@@ -104,24 +105,33 @@ function VerifyContent() {
     focusInput(0);
   };
 
-  const handleVerify = (e: React.FormEvent) => {
+  const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
     const code = otp.join("");
     if (code.length < 6) return;
 
     setVerifying(true);
+    setErrorMsg("");
 
-    // Simulate verification — any code works for UI demo
-    setTimeout(() => {
-      // Demo: code "123456" succeeds, else shake
-      if (code === "123456") {
-        window.location.href = "/dashboard";
-      } else {
-        setShake(true);
-        setVerifying(false);
-        setTimeout(() => setShake(false), 600);
-      }
-    }, 1200);
+    try {
+      const res = await fetch("/api/auth/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, code }),
+      });
+      const data = await res.json();
+      
+      if (!res.ok) throw new Error(data.error || "Verifikasi gagal");
+
+      // Redirect ke halaman login setelah berhasil verifikasi
+      window.location.href = "/signin";
+    } catch (err: any) {
+      setShake(true);
+      setErrorMsg(err.message);
+      setTimeout(() => setShake(false), 600);
+    } finally {
+      setVerifying(false);
+    }
   };
 
   const isComplete = otp.every((d) => d !== "");
@@ -150,6 +160,15 @@ function VerifyContent() {
           <span className="font-semibold text-slate-700 dark:text-slate-300">{email}</span>
         </p>
       </motion.div>
+
+      {/* Error Message */}
+      {errorMsg && (
+        <motion.div variants={itemVariants} className="rounded-xl border border-red-100 bg-red-50 p-4 dark:border-red-900/30 dark:bg-red-900/10 text-sm text-center">
+          <p className="text-red-800 dark:text-red-300">
+            {errorMsg}
+          </p>
+        </motion.div>
+      )}
 
       {/* OTP Inputs */}
       <form onSubmit={handleVerify}>

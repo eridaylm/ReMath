@@ -55,10 +55,44 @@ export default function SignUpPage() {
 
   const strength = useMemo(() => getPasswordStrength(password), [password]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // UI only — navigate to verification
-    window.location.href = "/verify?email=" + encodeURIComponent(email);
+    setError("");
+
+    if (password !== confirmPassword) {
+      setError("Password dan Konfirmasi Password tidak cocok.");
+      return;
+    }
+
+    if (!agreeTerms) {
+      setError("Anda harus menyetujui syarat & ketentuan.");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Gagal mendaftar");
+      }
+
+      // Redirect ke halaman verifikasi
+      window.location.href = "/verify?email=" + encodeURIComponent(email);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -76,12 +110,14 @@ export default function SignUpPage() {
         <p className="text-sm leading-relaxed text-slate-500 dark:text-slate-400">
           {t.auth.signUpSubtitle}
         </p>
-      </motion.div>      {/* Testing Info */}
-      <motion.div variants={itemVariants} className="rounded-xl border border-blue-100 bg-blue-50/50 p-4 dark:border-blue-900/30 dark:bg-blue-900/10 text-sm">
-        <p className="text-blue-800 dark:text-blue-300">
-          <strong>Info:</strong> Untuk testing, isi data form ini dengan bebas lalu klik Daftar. Kamu akan otomatis diarahkan ke halaman verifikasi.
-        </p>
-      </motion.div>
+      </motion.div>      {/* Error Message */}
+      {error && (
+        <motion.div variants={itemVariants} className="rounded-xl border border-red-100 bg-red-50 p-4 dark:border-red-900/30 dark:bg-red-900/10 text-sm">
+          <p className="text-red-800 dark:text-red-300">
+            {error}
+          </p>
+        </motion.div>
+      )}
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -220,9 +256,14 @@ export default function SignUpPage() {
         <motion.div variants={itemVariants} className="pt-1">
           <button
             type="submit"
-            className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-500 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:opacity-95 hover:shadow-blue-500/30 active:scale-[0.99]"
+            disabled={isLoading}
+            className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-500 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:opacity-95 hover:shadow-blue-500/30 active:scale-[0.99] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
           >
-            {t.auth.signUpBtn}
+            {isLoading ? (
+              <div className="h-5 w-5 animate-spin rounded-full border-2 border-white/20 border-t-white" />
+            ) : (
+              t.auth.signUpBtn
+            )}
           </button>
         </motion.div>
       </form>

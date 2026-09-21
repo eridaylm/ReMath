@@ -111,7 +111,7 @@ export default function AdminUsersPage() {
       const first = u.firstName || (u.name ? u.name.split(' ')[0] : '?');
       return first.substring(0, 1).toUpperCase();
     }
-    return u.username.substring(0, 1).toUpperCase();
+    return u.username?.substring(0, 1).toUpperCase() || '?';
   };
 
   return (
