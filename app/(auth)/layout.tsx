@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Logo from "@/components/Logo";
 import { useLanguage } from "@/contexts/language-context";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -32,12 +33,9 @@ export default function AuthLayout({
         </div>
 
         {/* Logo */}
-        <Link href="/" className="relative z-10 flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm text-white font-bold text-lg shadow-sm border border-white/10">
-            
-          </div>
-          <span className="text-2xl font-bold text-white">ReMath</span>
-        </Link>
+        <div className="relative z-10">
+          <Logo href="/" textClassName="text-2xl text-white font-bold" />
+        </div>
 
         {/* Center content */}
         <div className="relative z-10 space-y-6">
@@ -77,12 +75,9 @@ export default function AuthLayout({
         {/* Top bar */}
         <div className="flex items-center justify-between px-4 py-3 sm:px-6 md:px-8">
           {/* Mobile logo */}
-          <Link href="/" className="flex items-center gap-2 lg:invisible">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-500 text-white font-bold text-sm shadow-sm">
-              
-            </div>
-            <span className="text-lg font-bold text-slate-900 dark:text-white">ReMath</span>
-          </Link>
+          <div className="lg:invisible">
+            <Logo href="/" />
+          </div>
 
           <div className="flex items-center gap-2 text-sm font-medium">
             <button

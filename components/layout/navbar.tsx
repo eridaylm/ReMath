@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Menu, X, ChevronDown, User as UserIcon, LogOut, LayoutDashboard } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "../theme-toggle";
+import Logo from "../Logo";
 import { useLanguage } from "@/contexts/language-context";
 import { useAuth } from "@/context/AuthContext";
 
@@ -29,12 +30,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90 transition-colors">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8 lg:py-4">
-        <Link href={isAuthenticated ? (user?.role === 'admin' ? '/admin/questions' : '/dashboard') : '/'} className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-500 font-bold text-white shadow-sm transition-transform group-hover:scale-105">
-            
-          </div>
-          <span className="text-lg font-bold text-slate-900 dark:text-white transition-colors sm:text-xl">ReMath</span>
-        </Link>
+        <Logo href={isAuthenticated ? (user?.role === 'admin' ? '/admin/questions' : '/dashboard') : '/'} />
 
         <nav className="hidden items-center gap-8 lg:flex">
           {navItems.map((item) => (

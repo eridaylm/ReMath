@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from './theme-toggle';
 import { useAuth } from '@/context/AuthContext';
+import Logo from './Logo';
 import { 
-  GraduationCap, 
   Trophy, 
   Menu, 
   X, 
@@ -61,24 +61,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/90 transition-colors">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3.5 lg:px-8">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-500 text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform duration-200">
-            <GraduationCap className="h-6 w-6" />
-          </div>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-1.5">
-              <span className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">
-                Edu<span className="text-blue-600 dark:text-blue-400">Diagnostik</span>
-              </span>
-              <span className="inline-flex items-center rounded-md bg-blue-50 dark:bg-blue-950/60 px-1.5 py-0.5 text-[10px] font-semibold text-blue-700 dark:text-blue-300 border border-blue-200/50 dark:border-blue-800/50">
-                Adaptif
-              </span>
-            </div>
-            <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
-              Quantiva Math Engine
-            </span>
-          </div>
-        </Link>
+        <Logo />
 
         {/* Desktop Navigation Links */}
         <nav className="hidden items-center gap-1 md:flex">

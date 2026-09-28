@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Search, Bell, X, ChevronDown, User, LogOut } from "lucide-react";
 import Link from 'next/link';
+import Logo from '../Logo';
 import { useAuth } from '@/context/AuthContext';
 import { ThemeToggle } from "../theme-toggle";
 import { useLanguage } from "@/contexts/language-context";
@@ -35,11 +36,7 @@ export default function AdminHeader() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-500 font-bold text-white shadow-sm transition-transform group-hover:scale-105">
-          </div>
-          <span className="text-lg font-bold text-slate-900 dark:text-white transition-colors sm:text-xl">ReMath</span>
-        </Link>
+        <Logo href="/" />
 
         {/* Right Section */}
         <div className="flex items-center gap-3 sm:gap-4">

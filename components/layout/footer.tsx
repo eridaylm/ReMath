@@ -2,6 +2,7 @@
 
 // components/layout/footer.tsx
 import Link from "next/link";
+import Logo from "../Logo";
 import { useLanguage } from "@/contexts/language-context";
 
 export default function Footer() {
@@ -14,12 +15,7 @@ export default function Footer() {
     >
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:grid-cols-2 sm:gap-10 sm:px-6 sm:py-14 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] lg:px-8">
         <div>
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-500 font-bold text-white shadow-sm">
-              
-            </div>
-            <span className="text-2xl font-bold text-slate-900 dark:text-white">ReMath</span>
-          </div>
+          <Logo href="/" textClassName="text-2xl" />
           <p className="mt-5 max-w-sm text-sm leading-7 text-slate-500 dark:text-slate-400">
             {t.footer.description}
           </p>

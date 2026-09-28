@@ -2,6 +2,7 @@
 
 // components/dashboard/dashboard-sidebar.tsx
 import Link from "next/link";
+import Logo from "../Logo";
 import { usePathname } from "next/navigation";
 import { Home, ClipboardList, PieChart, Trophy, BookOpen, Settings, Crown } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
@@ -31,14 +32,9 @@ export default function DashboardSidebar() {
     <>
       {/* Desktop Sidebar */}
       <aside className="hidden w-[260px] flex-col border-r border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 lg:flex">
-        <Link href="/" className="mb-8 flex items-center gap-3 px-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-500 font-bold text-white shadow-sm">
-            
-          </div>
-          <div>
-            <p className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">ReMath</p>
-          </div>
-        </Link>
+        <div className="mb-8 px-2">
+          <Logo href="/" />
+        </div>
 
         <nav className="space-y-1">
           {menuItems.map((item) => {
