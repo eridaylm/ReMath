@@ -28,10 +28,10 @@ export default function HowItWorks() {
   const { t } = useLanguage();
 
   const colors = [
-    "bg-blue-600 dark:bg-blue-500",
-    "bg-emerald-500 dark:bg-emerald-600",
-    "bg-amber-500 dark:bg-amber-600",
-    "bg-indigo-500 dark:bg-indigo-600",
+    "border border-blue-200 bg-blue-50/50 backdrop-blur-md text-blue-600 dark:border-blue-800/50 dark:bg-blue-900/20 dark:text-blue-400",
+    "border border-blue-200 bg-blue-50/50 backdrop-blur-md text-blue-600 dark:border-blue-800/50 dark:bg-blue-900/20 dark:text-blue-400",
+    "border border-blue-200 bg-blue-50/50 backdrop-blur-md text-blue-600 dark:border-blue-800/50 dark:bg-blue-900/20 dark:text-blue-400",
+    "border border-blue-200 bg-blue-50/50 backdrop-blur-md text-blue-600 dark:border-blue-800/50 dark:bg-blue-900/20 dark:text-blue-400",
   ];
 
   const steps = t.howItWorks.steps.map((step, index) => ({
@@ -72,7 +72,7 @@ export default function HowItWorks() {
               className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
             >
               <div
-                className={`flex h-12 w-12 items-center justify-center rounded-full text-sm font-bold text-white ${step.color}`}
+                className={`flex h-12 w-12 items-center justify-center rounded-full text-sm font-bold ${step.color}`}
               >
                 {step.number}
               </div>
