@@ -17,3 +17,11 @@
 2. Nama : Michelle
    Email: michelle@remath.id
    Pass : user123
+
+3. Nama : Budi Santoso
+   Email: budi@remath.id
+   Pass : user123
+
+4. Nama : Sarah Kirana
+   Email: sarah@remath.id
+   Pass : user123

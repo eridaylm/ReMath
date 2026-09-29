@@ -29,10 +29,12 @@ const USERS_DB_KEY = 'edutest_users_db';
 
 const defaultDummyUsers: AppUser[] = [
   { email: 'admin@edutest.id', name: 'Super Administrator', firstName: 'Super', lastName: 'Administrator', username: 'admin', role: 'admin', pass: 'admin123' },
-  { email: 'arjuna@remath.id', name: 'I Komang Arjuna Tudung Negara', firstName: 'Arjuna', lastName: 'Negara', username: 'arjuna_admin', role: 'admin', pass: 'admin123' },
-  { email: 'erida@remath.id', name: 'Eridayalma Zahra Yohar', firstName: 'Erida', lastName: 'Yohar', username: 'erida_admin', role: 'admin', pass: 'admin123' },
-  { email: 'calizha@remath.id', name: 'Calizha', firstName: 'Calizha', lastName: '', username: 'calizha_user', role: 'user', pass: 'user123' },
-  { email: 'michelle@remath.id', name: 'Michelle', firstName: 'Michelle', lastName: '', username: 'michelle_user', role: 'user', pass: 'user123' },
+  { email: 'arjuna@remath.id', name: 'I Komang Arjuna Tudung Negara', firstName: 'Arjuna', lastName: 'Negara', username: 'arjuna_admin', role: 'admin', pass: 'admin123', avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150' },
+  { email: 'erida@remath.id', name: 'Eridayalma Zahra Yohar', firstName: 'Erida', lastName: 'Yohar', username: 'erida_admin', role: 'admin', pass: 'admin123', avatarUrl: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&q=80&w=150&h=150' },
+  { email: 'calizha@remath.id', name: 'Calizha', firstName: 'Calizha', lastName: '', username: 'calizha_user', role: 'user', pass: 'user123', avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150' },
+  { email: 'michelle@remath.id', name: 'Michelle', firstName: 'Michelle', lastName: '', username: 'michelle_user', role: 'user', pass: 'user123', avatarUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150&h=150' },
+  { email: 'budi@remath.id', name: 'Budi Santoso', firstName: 'Budi', lastName: 'Santoso', username: 'budisantoso', role: 'user', pass: 'user123', avatarUrl: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=150&h=150' },
+  { email: 'sarah@remath.id', name: 'Sarah Kirana', firstName: 'Sarah', lastName: 'Kirana', username: 'sarahkirana', role: 'user', pass: 'user123', avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150' },
 ];
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
