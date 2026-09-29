@@ -7,7 +7,12 @@ import { ThemeProvider as NextThemesProvider, type ThemeProviderProps } from "ne
 if (typeof window !== "undefined") {
   const originalError = console.error;
   console.error = (...args) => {
-    if (typeof args[0] === "string" && args[0].includes("Encountered a script tag while rendering React component")) {
+    const errorMsg = typeof args[0] === "string" ? args[0] : "";
+    if (errorMsg.includes("Encountered a script tag while rendering React component")) {
+      return;
+    }
+    // Suppress hydration errors caused by browser extensions (like Bitwarden) adding attributes
+    if (args.some((arg) => typeof arg === "string" && arg.includes("fdprocessedid"))) {
       return;
     }
     originalError.apply(console, args);
