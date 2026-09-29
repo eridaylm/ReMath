@@ -70,10 +70,10 @@ export default function PopularTests() {
           viewport={{ once: true, margin: "-50px" }}
           className="grid gap-4 grid-cols-2 sm:gap-5 md:grid-cols-3 xl:grid-cols-5"
         >
-          {tests.map((test) => (
+          {tests.map((test, index) => (
             <motion.div
               variants={itemVariants}
-              key={test.title}
+              key={index}
               className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:shadow-slate-800"
             >
               <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl dark:bg-blue-900/30">
