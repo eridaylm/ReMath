@@ -48,17 +48,42 @@ export default async function getCroppedImg(
   
   const data = ctx.getImageData(0, 0, safeArea, safeArea);
 
-  // set canvas width to final desired crop size - this will clear existing context
-  canvas.width = pixelCrop.width;
-  canvas.height = pixelCrop.height;
+  // Resize the image to a smaller thumbnail (max 250x250) to prevent LocalStorage quota issues
+  const MAX_SIZE = 250;
+  let targetWidth = pixelCrop.width;
+  let targetHeight = pixelCrop.height;
 
-  // paste generated rotate image with correct offsets for x,y crop values.
-  ctx.putImageData(
-    data,
-    Math.round(0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x),
-    Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y)
-  );
+  if (targetWidth > MAX_SIZE || targetHeight > MAX_SIZE) {
+    if (targetWidth > targetHeight) {
+      targetHeight = Math.round((targetHeight / targetWidth) * MAX_SIZE);
+      targetWidth = MAX_SIZE;
+    } else {
+      targetWidth = Math.round((targetWidth / targetHeight) * MAX_SIZE);
+      targetHeight = MAX_SIZE;
+    }
+  }
 
-  // As Base64 string
-  return canvas.toDataURL('image/jpeg', 0.9);
+  // Create a temporary canvas to hold the original cropped image
+  const tempCanvas = document.createElement('canvas');
+  tempCanvas.width = pixelCrop.width;
+  tempCanvas.height = pixelCrop.height;
+  const tempCtx = tempCanvas.getContext('2d');
+  
+  if (tempCtx) {
+    tempCtx.putImageData(
+      data,
+      Math.round(0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x),
+      Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y)
+    );
+  }
+
+  // set final canvas to the resized dimensions
+  canvas.width = targetWidth;
+  canvas.height = targetHeight;
+
+  // draw the cropped image scaled down onto the final canvas
+  ctx.drawImage(tempCanvas, 0, 0, targetWidth, targetHeight);
+
+  // As Base64 string, lower quality a bit more to be super safe
+  return canvas.toDataURL('image/jpeg', 0.8);
 }
