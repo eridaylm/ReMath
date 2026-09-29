@@ -16,6 +16,7 @@ import {
   SUBTOPICS_SEQUENCE,
   ROOT_CAUSE_MAP,
 } from '@/data/mockData';
+import { useLanguage } from '@/contexts/language-context';
 
 const QUESTIONS_STORAGE_KEY = 'edutest_questions_bank';
 const RESULT_STORAGE_KEY = 'edutest_diagnostic_latest_result';
@@ -65,6 +66,7 @@ interface TestContextType {
 const TestContext = createContext<TestContextType | undefined>(undefined);
 
 export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { language } = useLanguage();
   // 1. Questions Bank with LocalStorage Persistence
   const [questions, setQuestions] = useState<Question[]>(INITIAL_QUESTIONS);
 
@@ -245,7 +247,7 @@ export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Generate finalized result for the entire test
   const finalizeTestResults = useCallback(
-    (allSubResults: Record<string, SubTopicResult>, finalHonestyCount: number, finalTotalTime: number) => {
+    (allSubResults: Record<string, SubTopicResult>, finalHonestyCount: number, finalTotalTime: number, overrideName?: string) => {
       const resultsArray = Object.values(allSubResults);
       const smaMasteredCount = resultsArray.filter((r) => r.status === 'SMA_MASTERED').length;
       const smpCount = resultsArray.filter((r) => r.status === 'SMP_FOUNDATIONAL').length;
@@ -261,18 +263,34 @@ export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children
       )?.subtopic || 'Aljabar';
 
       // Supportive empathetic anti-stigma headlines
-      let headline = `Luar biasa, kamu memiliki fondasi penalaran matematika yang tangguh!`;
-      let motivational = `Setiap siswa memiliki peta belajar yang unik. Mengetahui di mana fondasi yang perlu dipoles adalah rahasia terbesar para juara.`;
+      let headline = language === 'en' 
+        ? `Outstanding, you have a resilient foundation in mathematical reasoning!`
+        : `Luar biasa, kamu memiliki fondasi penalaran matematika yang tangguh!`;
+      let motivational = language === 'en'
+        ? `Every student has a unique learning map. Knowing where your foundation needs polishing is a champion's greatest secret.`
+        : `Setiap siswa memiliki peta belajar yang unik. Mengetahui di mana fondasi yang perlu dipoles adalah rahasia terbesar para juara.`;
 
       if (smaMasteredCount >= 3) {
-        headline = `Performa Luar Biasa! Sebagian besar pilar matematika SMA telah kamu kuasai.`;
-        motivational = `Fondasi kuatmu di ${strength} membuktikan kamu siap melangkah ke soal-soal tingkat lanjut. Tinggal sedikit memoles materi ${focus}.`;
+        headline = language === 'en'
+          ? `Outstanding Performance! You have mastered most of the high school math pillars.`
+          : `Performa Luar Biasa! Sebagian besar pilar matematika SMA telah kamu kuasai.`;
+        motivational = language === 'en'
+          ? `Your strong foundation in ${strength} proves you are ready for advanced questions. Just a little polish needed in ${focus}.`
+          : `Fondasi kuatmu di ${strength} membuktikan kamu siap melangkah ke soal-soal tingkat lanjut. Tinggal sedikit memoles materi ${focus}.`;
       } else if (smaMasteredCount + smpCount >= 3) {
-        headline = `Fondasi SMP kamu sangat kokoh! Sedikit jembatan konsep akan membawamu menguasai SMA.`;
-        motivational = `Kamu tidak gagal, melainkan hanya membutuhkan jembatan kecil antara pemfaktoran aljabar dasar dengan konsep SMA di topik ${focus}.`;
+        headline = language === 'en'
+          ? `Your Middle School foundation is very solid! Just a few conceptual bridges will help you master High School.`
+          : `Fondasi SMP kamu sangat kokoh! Sedikit jembatan konsep akan membawamu menguasai SMA.`;
+        motivational = language === 'en'
+          ? `You haven't failed, you just need a small bridge between basic algebra factorization and High School concepts in ${focus}.`
+          : `Kamu tidak gagal, melainkan hanya membutuhkan jembatan kecil antara pemfaktoran aljabar dasar dengan konsep SMA di topik ${focus}.`;
       } else {
-        headline = `Langkah awal yang jujur dan berani! Kita temukan titik mula terbaik untuk melesat.`;
-        motivational = `Matematika adalah seperti tangga bertingkat. Mengulang fondasi di tingkat dasar bukan tanda kelemahan, melainkan percepatan untuk lompatan besar berikutnya!`;
+        headline = language === 'en'
+          ? `An honest and brave first step! We found the best starting point for you to soar.`
+          : `Langkah awal yang jujur dan berani! Kita temukan titik mula terbaik untuk melesat.`;
+        motivational = language === 'en'
+          ? `Math is like climbing a staircase. Reviewing foundations at the basic level is not a weakness, but an acceleration for the next big leap!`
+          : `Matematika adalah seperti tangga bertingkat. Mengulang fondasi di tingkat dasar bukan tanda kelemahan, melainkan percepatan untuk lompatan besar berikutnya!`;
       }
 
       // Badges
@@ -280,8 +298,10 @@ export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (finalHonestyCount > 0) {
         badges.push({
           id: 'b-honesty',
-          title: 'Kejujuran Teruji (Integritas Emas)',
-          description: `Kamu menggunakan tombol "Belum Mempelajari Ini" sebanyak ${finalHonestyCount} kali tanpa menebak sembarangan. Ini tanda pembelajar sejati!`,
+          title: language === 'en' ? 'Proven Honesty (Golden Integrity)' : 'Kejujuran Teruji (Integritas Emas)',
+          description: language === 'en' 
+            ? `You used the "I Don't Know" button ${finalHonestyCount} times without randomly guessing. This is a sign of a true learner!`
+            : `Kamu menggunakan tombol "Belum Mempelajari Ini" sebanyak ${finalHonestyCount} kali tanpa menebak sembarangan. Ini tanda pembelajar sejati!`,
           icon: 'ShieldCheck',
           color: 'emerald',
         });
@@ -289,8 +309,10 @@ export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (finalTotalTime < 300) {
         badges.push({
           id: 'b-speed',
-          title: 'Pemikir Cepat & Tangkas',
-          description: 'Menyelesaikan seluruh blok diagnostik adaptif dengan efisiensi waktu sangat tinggi.',
+          title: language === 'en' ? 'Quick & Agile Thinker' : 'Pemikir Cepat & Tangkas',
+          description: language === 'en'
+            ? 'Completed the entire adaptive diagnostic block with very high time efficiency.'
+            : 'Menyelesaikan seluruh blok diagnostik adaptif dengan efisiensi waktu sangat tinggi.',
           icon: 'Zap',
           color: 'blue',
         });
@@ -298,23 +320,27 @@ export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (smaMasteredCount >= 1) {
         badges.push({
           id: 'b-mastery',
-          title: 'Penguasa Materi SMA',
-          description: `Berhasil menuntaskan blok SMA pada topik ${strength} dengan akurasi gemilang.`,
+          title: language === 'en' ? 'High School Master' : 'Penguasa Materi SMA',
+          description: language === 'en'
+            ? `Successfully completed the High School block in ${strength} with brilliant accuracy.`
+            : `Berhasil menuntaskan blok SMA pada topik ${strength} dengan akurasi gemilang.`,
           icon: 'Award',
           color: 'amber',
         });
       }
       badges.push({
         id: 'b-growth',
-        title: 'Mindset Bertumbuh',
-        description: 'Menyelesaikan tes diagnostik adaptif tanpa rasa takut demi mengetahui fondasi diri yang sebenarnya.',
+        title: language === 'en' ? 'Growth Mindset' : 'Mindset Bertumbuh',
+        description: language === 'en'
+          ? 'Completed the adaptive diagnostic test fearlessly to uncover your true foundation.'
+          : 'Menyelesaikan tes diagnostik adaptif tanpa rasa takut demi mengetahui fondasi diri yang sebenarnya.',
         icon: 'Sparkles',
         color: 'indigo',
       });
 
       const diagnosticOutput: DiagnosticResult = {
         id: `DIAG-${Date.now()}`,
-        studentName,
+        studentName: overrideName || studentName,
         completedAt: new Date().toLocaleDateString('id-ID', {
           day: 'numeric',
           month: 'long',
@@ -522,13 +548,15 @@ export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children
         honestyCount: 1,
         timeSpentSeconds: 65,
         rootCauseAnalysis: {
-          title: 'Hambatan Aljabar SMA Berakar dari Manipulasi Simbolik Lanjutan',
-          description: 'Siswa menguasai pemfaktoran aljabar SMP dengan sempurna, namun ragu pada bentuk diskriminan kuadrat dan komposisi fungsi SMA.',
-          missingPrerequisite: 'Pemfaktoran kuadrat sempurna dan analisis diskriminan fungsi.',
+          title: language === 'en' ? 'High School Algebra Hurdle Rooted in Advanced Symbolic Manipulation' : 'Hambatan Aljabar SMA Berakar dari Manipulasi Simbolik Lanjutan',
+          description: language === 'en' ? 'Student perfectly masters SMP algebraic factorization but hesitates on quadratic discriminants and SMA composite functions.' : 'Siswa menguasai pemfaktoran aljabar SMP dengan sempurna, namun ragu pada bentuk diskriminan kuadrat dan komposisi fungsi SMA.',
+          missingPrerequisite: language === 'en' ? 'Perfect square factorization and function discriminant analysis.' : 'Pemfaktoran kuadrat sempurna dan analisis diskriminan fungsi.',
         },
         recommendation: {
-          actionTitle: 'Rekomendasi Pemulihan Aljabar',
-          learningModules: ['Review Tuntas Pemfaktoran SMP', 'Transisi Fungsi Kuadrat SMA', 'Latihan Manipulasi Simbolik'],
+          actionTitle: language === 'en' ? 'Algebra Remedial Recommendation' : 'Rekomendasi Pemulihan Aljabar',
+          learningModules: language === 'en' 
+            ? ['Complete SMP Factorization Review', 'SMA Quadratic Function Transition', 'Symbolic Manipulation Practice']
+            : ['Review Tuntas Pemfaktoran SMP', 'Transisi Fungsi Kuadrat SMA', 'Latihan Manipulasi Simbolik'],
           priority: 'Sedang',
         },
       },
@@ -544,13 +572,15 @@ export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children
         honestyCount: 0,
         timeSpentSeconds: 55,
         rootCauseAnalysis: {
-          title: 'Spasial Ruang Tiga Dimensi dan Analitik Unggul',
-          description: 'Visualisasi proyeksi titik ke bidang serta formulasi persamaan lingkaran dikuasai secara komprehensif.',
-          missingPrerequisite: 'Tidak ada celah.',
+          title: language === 'en' ? 'Excellent 3D Spatial and Analytical Skills' : 'Spasial Ruang Tiga Dimensi dan Analitik Unggul',
+          description: language === 'en' ? 'Visualization of point projections onto planes and formulation of circle equations are comprehensively mastered.' : 'Visualisasi proyeksi titik ke bidang serta formulasi persamaan lingkaran dikuasai secara komprehensif.',
+          missingPrerequisite: language === 'en' ? 'No gaps.' : 'Tidak ada celah.',
         },
         recommendation: {
-          actionTitle: 'Rekomendasi Pengayaan Geometri',
-          learningModules: ['Vektor Ruang R3 Lanjutan', 'Irisan Kerucut Analitik'],
+          actionTitle: language === 'en' ? 'Geometry Enrichment Recommendation' : 'Rekomendasi Pengayaan Geometri',
+          learningModules: language === 'en' 
+            ? ['Advanced R3 Space Vectors', 'Analytic Conic Sections']
+            : ['Vektor Ruang R3 Lanjutan', 'Irisan Kerucut Analitik'],
           priority: 'Rendah',
         },
       },
@@ -566,13 +596,15 @@ export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children
         honestyCount: 2,
         timeSpentSeconds: 80,
         rootCauseAnalysis: {
-          title: 'Kesulitan Memahami Turunan Berakar dari Konsep Laju & Perbandingan SD',
-          description: 'Konsep kecepatan sebagai laju perubahan jarak terhadap waktu belum dipahami sebagai rasio per satuan waktu sebelum masuk ke limit.',
-          missingPrerequisite: 'Penalaran perbandingan senilai dan laju satuan (unit rate).',
+          title: language === 'en' ? 'Difficulty Grasping Derivatives Rooted in Elementary Rate & Ratio Concepts' : 'Kesulitan Memahami Turunan Berakar dari Konsep Laju & Perbandingan SD',
+          description: language === 'en' ? 'The concept of speed as rate of change over time is not yet understood as a ratio per unit time before entering limits.' : 'Konsep kecepatan sebagai laju perubahan jarak terhadap waktu belum dipahami sebagai rasio per satuan waktu sebelum masuk ke limit.',
+          missingPrerequisite: language === 'en' ? 'Proportional reasoning and unit rates.' : 'Penalaran perbandingan senilai dan laju satuan (unit rate).',
         },
         recommendation: {
-          actionTitle: 'Rekomendasi Pemulihan Kalkulus',
-          learningModules: ['Pemahaman Rasio dan Laju Satuan', 'Grafik Pergerakan Sederhana', 'Fondasi Variabel Berubah'],
+          actionTitle: language === 'en' ? 'Calculus Remedial Recommendation' : 'Rekomendasi Pemulihan Kalkulus',
+          learningModules: language === 'en'
+            ? ['Understanding Ratios and Unit Rates', 'Simple Motion Graphs', 'Changing Variables Foundation']
+            : ['Pemahaman Rasio dan Laju Satuan', 'Grafik Pergerakan Sederhana', 'Fondasi Variabel Berubah'],
           priority: 'Tinggi',
         },
       },
@@ -588,13 +620,15 @@ export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children
         honestyCount: 0,
         timeSpentSeconds: 60,
         rootCauseAnalysis: {
-          title: 'Pemikiran Probabilistik dan Analisis Sebaran Data Sangat Baik',
-          description: 'Siswa mampu menghitung ukuran variabilitas dan kombinasi peluang majemuk dengan akurasi tinggi.',
-          missingPrerequisite: 'Tidak ada celah.',
+          title: language === 'en' ? 'Excellent Probabilistic Thinking and Data Distribution Analysis' : 'Pemikiran Probabilistik dan Analisis Sebaran Data Sangat Baik',
+          description: language === 'en' ? 'Student is capable of calculating measures of variability and compound probability combinations with high accuracy.' : 'Siswa mampu menghitung ukuran variabilitas dan kombinasi peluang majemuk dengan akurasi tinggi.',
+          missingPrerequisite: language === 'en' ? 'No gaps.' : 'Tidak ada celah.',
         },
         recommendation: {
-          actionTitle: 'Rekomendasi Pengayaan Statistika',
-          learningModules: ['Distribusi Probabilitas Normal', 'Inferensi Statistik & Uji Hipotesis'],
+          actionTitle: language === 'en' ? 'Statistics Enrichment Recommendation' : 'Rekomendasi Pengayaan Statistika',
+          learningModules: language === 'en' 
+            ? ['Normal Probability Distribution', 'Statistical Inference & Hypothesis Testing']
+            : ['Distribusi Probabilitas Normal', 'Inferensi Statistik & Uji Hipotesis'],
           priority: 'Rendah',
         },
       },
@@ -610,20 +644,33 @@ export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children
         honestyCount: 0,
         timeSpentSeconds: 48,
         rootCauseAnalysis: {
-          title: 'Literasi Bilangan Eksponensial dan Finansial Sangat Fasih',
-          description: 'Menguasai konsep deret tak hingga konvergen, hukum logaritma, serta pemodelan bunga majemuk secara menyeluruh.',
-          missingPrerequisite: 'Tidak ada.',
+          title: language === 'en' ? 'Highly Fluent in Exponential and Financial Number Literacy' : 'Literasi Bilangan Eksponensial dan Finansial Sangat Fasih',
+          description: language === 'en' ? 'Thoroughly masters infinite convergent series, logarithm rules, and compound interest modeling.' : 'Menguasai konsep deret tak hingga konvergen, hukum logaritma, serta pemodelan bunga majemuk secara menyeluruh.',
+          missingPrerequisite: language === 'en' ? 'None.' : 'Tidak ada.',
         },
         recommendation: {
-          actionTitle: 'Rekomendasi Pengayaan Aritmatika',
-          learningModules: ['Aplikasi Logaritma Skala Richter & pH', 'Anuitas & Amortisasi Pinjaman'],
+          actionTitle: language === 'en' ? 'Arithmetic Enrichment Recommendation' : 'Rekomendasi Pengayaan Aritmatika',
+          learningModules: language === 'en' 
+            ? ['Logarithm Applications in Richter Scale & pH', 'Annuities & Loan Amortization']
+            : ['Aplikasi Logaritma Skala Richter & pH', 'Anuitas & Amortisasi Pinjaman'],
           priority: 'Rendah',
         },
       },
     };
 
-    finalizeTestResults(sampleSubResults, 3, 308);
+    const sampleName = language === 'en' ? 'Independent Student' : 'Siswa Mandiri';
+    setStudentName(sampleName);
+    finalizeTestResults(sampleSubResults, 3, 308, sampleName);
   };
+
+  // Automatically refresh sample data when language changes so translations apply instantly
+  useEffect(() => {
+    if (latestResult && latestResult.studentName === (language === 'en' ? 'Siswa Mandiri' : 'Independent Student')) {
+      loadSampleResult();
+    } else if (latestResult && (latestResult.studentName === 'Siswa Mandiri' || latestResult.studentName === 'Independent Student')) {
+      loadSampleResult();
+    }
+  }, [language]);
 
   return (
     <TestContext.Provider
