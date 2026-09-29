@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { motion, Variants } from "framer-motion";
 import { ShieldCheck } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -27,6 +29,8 @@ function VerifyContent() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || "user@email.com";
+  const { forceLogin } = useAuth();
+  const router = useRouter();
 
   const [otp, setOtp] = useState<string[]>(Array(6).fill(""));
   const [countdown, setCountdown] = useState(60);
@@ -122,8 +126,13 @@ function VerifyContent() {
       // Beri waktu delay buatan
       await new Promise(resolve => setTimeout(resolve, 800));
 
-      // Redirect ke halaman dashboard setelah berhasil verifikasi
-      window.location.href = "/dashboard";
+      const res = await forceLogin(email);
+      if (!res.success) {
+        throw new Error(res.error || "Gagal masuk ke sistem.");
+      }
+
+      // Redirect ke halaman dashboard setelah berhasil verifikasi dan login
+      router.push("/dashboard");
     } catch (err: any) {
       setShake(true);
       setErrorMsg(err.message);

@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useState, useMemo } from "react";
-import { motion, Variants } from "framer-motion";
-import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
+import { motion, Variants, AnimatePresence } from "framer-motion";
+import { Eye, EyeOff, Mail, Lock, User, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
@@ -61,6 +61,7 @@ export default function SignUpPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -105,25 +106,73 @@ export default function SignUpPage() {
       // Beri waktu loading buatan sedikit
       await new Promise(resolve => setTimeout(resolve, 800));
 
-      // Tampilkan popup sukses
-      alert("Akun berhasil didaftarkan! Silakan masukkan kode verifikasi.");
+      // Tampilkan popup sukses (bukan alert)
+      setShowSuccessPopup(true);
 
-      // Redirect ke halaman verifikasi
-      router.push("/verify?email=" + encodeURIComponent(email.trim()));
+      // Otomatis redirect setelah 2.5 detik
+      setTimeout(() => {
+        router.push("/verify?email=" + encodeURIComponent(email.trim()));
+      }, 2500);
+
     } catch (err: any) {
       setError(err.message || "Terjadi kesalahan pada sistem.");
-    } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="space-y-7"
-    >
+    <>
+      <AnimatePresence>
+        {showSuccessPopup && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 10 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-sm overflow-hidden rounded-2xl bg-white p-8 text-center shadow-2xl dark:bg-slate-900 border border-slate-200 dark:border-slate-800"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-transparent" />
+              
+              <div className="relative flex flex-col items-center gap-4">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30">
+                  <CheckCircle2 className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                    Pendaftaran Berhasil!
+                  </h3>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                    Akun Anda telah sukses didaftarkan. Mengarahkan ke halaman verifikasi...
+                  </p>
+                </div>
+                
+                {/* Loader bar */}
+                <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                  <motion.div
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 2.5, ease: "linear" }}
+                    className="h-full bg-gradient-to-r from-indigo-500 to-violet-500"
+                  />
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="space-y-7 relative"
+      >
       {/* Header */}
       <motion.div variants={itemVariants} className="space-y-2">
         <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
@@ -297,6 +346,7 @@ export default function SignUpPage() {
           {t.auth.signInLink}
         </Link>
       </motion.p>
-    </motion.div>
+      </motion.div>
+    </>
   );
 }

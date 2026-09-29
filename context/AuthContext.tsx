@@ -14,6 +14,7 @@ interface AuthContextType {
   updateUser: (u: AppUser) => void;
   deleteUser: (email: string) => void;
   login: (email: string, pass: string) => Promise<{ success: boolean; error?: string }>;
+  forceLogin: (email: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   updateProfile: (updates: Partial<AppUser>) => void;
   changePassword: (oldPass: string, newPass: string) => { success: boolean; error?: string };
@@ -125,6 +126,35 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const forceLogin = async (email: string): Promise<{ success: boolean; error?: string }> => {
+    const e = email.trim().toLowerCase();
+    
+    const matchedUser = allUsers.find(u => u.email.toLowerCase() === e);
+
+    if (matchedUser) {
+      const now = new Date().toLocaleString('id-ID');
+      const updatedUser: AppUser = {
+        ...matchedUser,
+        lastAccess: now,
+        token: 'edu-jwt-mock-' + Date.now(),
+      };
+      
+      updateUser(updatedUser);
+      setUser(updatedUser);
+      setAuthError(null);
+      try {
+        localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(updatedUser));
+      } catch (err) {
+        console.error('Storage write error', err);
+      }
+      return { success: true };
+    } else {
+      const err = 'User tidak ditemukan.';
+      setAuthError(err);
+      return { success: false, error: err };
+    }
+  };
+
   const logout = () => {
     setUser(null);
     setAuthError(null);
@@ -229,6 +259,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isAdminLoggedIn,
         isLoading,
         login,
+        forceLogin,
         logout,
         updateProfile,
         changePassword,
