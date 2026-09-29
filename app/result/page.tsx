@@ -462,42 +462,45 @@ export default function ResultPage() {
               </div>
             </div>
 
-            <div className="relative border-l-2 border-blue-200 dark:border-blue-900/60 ml-4 pl-6 space-y-6">
+            <div className="relative ml-2 space-y-8">
+              {/* Vertical Line */}
+              <div className="absolute left-[11px] top-2 bottom-2 w-[2px] bg-blue-200 dark:bg-blue-900/60" />
+              
               {/* Step 1 */}
-              <div className="relative">
-                <div className="absolute -left-[31px] top-0 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
+              <div className="relative pl-10">
+                <div className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-blue-500 dark:border-blue-400 text-blue-600 dark:text-blue-400 text-xs font-bold">
                   1
                 </div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">
                   Perbaiki Fondasi SD &amp; SMP yang Teridentifikasi Belum Tuntas
                 </h4>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
                   Fokus pada topik berstatus <span className="font-semibold text-rose-600">Needs Remedial</span> atau <span className="font-semibold text-orange-600">SD Foundation</span> terlebih dahulu. Menguasai operasi pecahan dan suku aljabar sederhana membutuhkan waktu rata-rata 3-5 jam belajar mandiri.
                 </p>
               </div>
 
               {/* Step 2 */}
-              <div className="relative">
-                <div className="absolute -left-[31px] top-0 flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 text-white text-xs font-bold">
+              <div className="relative pl-10">
+                <div className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-indigo-500 dark:border-indigo-400 text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                   2
                 </div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">
                   Bangun Jembatan Konseptual SMP ke SMA
                 </h4>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
                   Gunakan pemahaman kemiringan gradien garis lurus SMP untuk memahami konsep turunan kalkulus SMA secara visual tanpa rumus hafalan buta.
                 </p>
               </div>
 
               {/* Step 3 */}
-              <div className="relative">
-                <div className="absolute -left-[31px] top-0 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-600 text-white text-xs font-bold">
+              <div className="relative pl-10">
+                <div className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-emerald-500 dark:border-emerald-400 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
                   3
                 </div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">
                   Asah Soal Tingkat Tinggi (HOTS) pada Domain Unggulan
                 </h4>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
                   Pertahankan keunggulan pada topik yang berstatus <span className="font-semibold text-emerald-600">SMA Mastered</span> dengan mengeksplorasi soal olimpiade atau seleksi perguruan tinggi negeri.
                 </p>
               </div>
@@ -505,21 +508,21 @@ export default function ResultPage() {
           </div>
 
           {/* Action Footer Banner */}
-          <div className="rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 p-6 sm:p-8 text-white text-center shadow-lg shadow-blue-500/20 print:hidden">
-            <h3 className="text-xl font-bold">Siap Mengukur Kembali Perkembanganmu?</h3>
-            <p className="mt-1.5 text-xs sm:text-sm text-blue-100 max-w-xl mx-auto">
+          <div className="rounded-2xl bg-gradient-to-br from-white/80 to-blue-50/80 dark:from-slate-900/80 dark:to-blue-950/40 backdrop-blur-md border border-blue-200 dark:border-blue-800 p-6 sm:p-8 text-center shadow-sm print:hidden">
+            <h3 className="text-xl font-bold text-blue-950 dark:text-white">Siap Mengukur Kembali Perkembanganmu?</h3>
+            <p className="mt-1.5 text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
               Kamu bisa mengulang tes diagnostik adaptif kapan saja untuk memperbarui peta fondasi matematika kamu.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <button
                 onClick={handleRetake}
-                className="rounded-xl bg-white px-5 py-2.5 text-xs sm:text-sm font-bold text-blue-700 shadow-md hover:bg-blue-50 transition"
+                className="rounded-xl bg-blue-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-sm hover:bg-blue-700 transition"
               >
                 Mulai Tes Ulang
               </button>
               <Link
                 href="/leaderboard"
-                className="rounded-xl border border-white/40 bg-white/10 px-5 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-white/20 backdrop-blur transition"
+                className="rounded-xl border border-slate-300 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 px-5 py-2.5 text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
               >
                 Lihat Papan Peringkat
               </Link>
