@@ -25,11 +25,15 @@ export default function AdminHeader() {
   // Dynamic notification data
   const recentUser = allUsers.find(u => u.role === 'user' && u.lastAccess) || allUsers.find(u => u.role === 'user');
   const recentUserName = recentUser ? (recentUser.firstName || recentUser.name.split(' ')[0]) : "Calizha";
-  const recentUserTime = recentUser?.lastAccess ? `Akses: ${recentUser.lastAccess}` : "Baru saja";
+  const recentUserTime = recentUser?.lastAccess 
+    ? (language === 'en' ? `Access: ${recentUser.lastAccess}` : `Akses: ${recentUser.lastAccess}`) 
+    : (language === 'en' ? "Just now" : "Baru saja");
 
   const recentQuestion = questions.length > 0 ? questions[questions.length - 1] : null;
-  const recentQCategory = recentQuestion ? `${recentQuestion.subtopic} ${recentQuestion.level}` : "Geometri SMA";
-  const recentQTime = recentQuestion?.id?.startsWith('Q-') ? "Baru saja" : "Beberapa waktu lalu";
+  const recentQCategory = recentQuestion ? `${recentQuestion.subtopic} ${recentQuestion.level}` : (language === 'en' ? "High School Geometry" : "Geometri SMA");
+  const recentQTime = recentQuestion?.id?.startsWith('Q-') 
+    ? (language === 'en' ? "Just now" : "Baru saja") 
+    : (language === 'en' ? "A few moments ago" : "Beberapa waktu lalu");
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90 transition-colors">
@@ -81,8 +85,8 @@ export default function AdminHeader() {
             {notifOpen && (
               <div className="absolute right-0 mt-3 w-80 rounded-2xl border border-slate-200 bg-white shadow-xl dark:border-slate-800 dark:bg-slate-900 z-50">
                 <div className="flex items-center justify-between border-b border-slate-100 p-4 dark:border-slate-800">
-                  <h3 className="font-bold text-slate-900 dark:text-white">Aktivitas Sistem</h3>
-                  <span className="rounded-full bg-indigo-50 px-2 py-0.5 text-xs font-bold text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">2 Baru</span>
+                  <h3 className="font-bold text-slate-900 dark:text-white">{language === 'en' ? 'System Activity' : 'Aktivitas Sistem'}</h3>
+                  <span className="rounded-full bg-indigo-50 px-2 py-0.5 text-xs font-bold text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">{language === 'en' ? '2 New' : '2 Baru'}</span>
                 </div>
                 <div className="max-h-[300px] overflow-y-auto p-2 space-y-1">
                   <div className="flex items-start gap-3 rounded-xl p-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition cursor-pointer">
@@ -90,8 +94,8 @@ export default function AdminHeader() {
                       <User className="h-4 w-4" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Pengguna Baru Login</p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1"><span className="font-medium text-slate-700 dark:text-slate-300">{recentUserName}</span> telah masuk ke sistem.</p>
+                      <p className="text-sm font-semibold text-slate-900 dark:text-white leading-tight">{language === 'en' ? 'New User Login' : 'Pengguna Baru Login'}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1"><span className="font-medium text-slate-700 dark:text-slate-300">{recentUserName}</span> {language === 'en' ? 'has logged into the system.' : 'telah masuk ke sistem.'}</p>
                       <p className="mt-1 text-[10px] font-medium text-blue-600 dark:text-blue-500">{recentUserTime}</p>
                     </div>
                   </div>
@@ -100,8 +104,8 @@ export default function AdminHeader() {
                       <span className="font-bold">+</span>
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Soal Baru Ditambahkan</p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1"><span className="font-medium text-slate-700 dark:text-slate-300">Sistem/Admin</span> menambahkan soal baru di kategori <span className="font-medium">{recentQCategory}</span>.</p>
+                      <p className="text-sm font-semibold text-slate-900 dark:text-white leading-tight">{language === 'en' ? 'New Question Added' : 'Soal Baru Ditambahkan'}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1"><span className="font-medium text-slate-700 dark:text-slate-300">{language === 'en' ? 'System/Admin' : 'Sistem/Admin'}</span> {language === 'en' ? 'added a new question in the category' : 'menambahkan soal baru di kategori'} <span className="font-medium">{recentQCategory}</span>.</p>
                       <p className="mt-1 text-[10px] font-medium text-emerald-600 dark:text-emerald-500">{recentQTime}</p>
                     </div>
                   </div>
@@ -111,7 +115,7 @@ export default function AdminHeader() {
                     onClick={() => setNotifOpen(false)}
                     className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300"
                   >
-                    Tandai semua dibaca
+                    {language === 'en' ? 'Mark all as read' : 'Tandai semua dibaca'}
                   </button>
                 </div>
               </div>
@@ -136,7 +140,7 @@ export default function AdminHeader() {
               <div className="hidden sm:block text-left">
                 <p className="text-sm font-bold text-slate-900 dark:text-white leading-tight">{user?.username || user?.firstName || 'Administrator'}</p>
                 <p className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 capitalize">
-                  {user?.role === 'admin' ? 'Admin' : 'Pelajar'}
+                  {user?.role === 'admin' ? 'Admin' : (language === 'en' ? 'Student' : 'Pelajar')}
                 </p>
               </div>
               <ChevronDown className={`hidden sm:block h-4 w-4 text-slate-400 transition-transform ${profileOpen ? 'rotate-180' : ''}`} />
@@ -152,7 +156,7 @@ export default function AdminHeader() {
                     className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-800 transition"
                   >
                     <User className="h-4 w-4" />
-                    Lihat Profile
+                    {language === 'en' ? 'View Profile' : 'Lihat Profile'}
                   </Link>
                   <button 
                     onClick={() => {

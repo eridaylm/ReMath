@@ -346,7 +346,7 @@ export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children
         console.error('Failed to save diagnostic result', e);
       }
     },
-    [studentName]
+    [studentName, language]
   );
 
   // Evaluate and advance subtopic or level
