@@ -5,6 +5,8 @@ import { useState, useMemo } from "react";
 import { motion, Variants } from "framer-motion";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -55,6 +57,8 @@ export default function SignUpPage() {
 
   const strength = useMemo(() => getPasswordStrength(password), [password]);
 
+  const { addUser, allUsers } = useAuth();
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -74,22 +78,37 @@ export default function SignUpPage() {
 
     setIsLoading(true);
     try {
-      const res = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Gagal mendaftar");
+      // Periksa apakah email sudah terdaftar
+      const existingUser = allUsers.find(u => u.email.toLowerCase() === email.toLowerCase());
+      if (existingUser) {
+        throw new Error("Email sudah terdaftar. Silakan gunakan email lain.");
       }
 
-      // Redirect ke halaman verifikasi
-      window.location.href = "/verify?email=" + encodeURIComponent(email);
+      // Format nama pengguna
+      const nameParts = name.trim().split(" ");
+      const firstName = nameParts[0] || "";
+      const lastName = nameParts.slice(1).join(" ") || "";
+      const username = firstName.toLowerCase() + Math.floor(Math.random() * 1000);
+
+      // Tambahkan pengguna ke mock database (localStorage)
+      addUser({
+        email: email.trim().toLowerCase(),
+        name: name.trim(),
+        firstName,
+        lastName,
+        username,
+        role: "user",
+        pass: password,
+        avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`
+      });
+
+      // Beri waktu loading buatan sedikit
+      await new Promise(resolve => setTimeout(resolve, 800));
+
+      // Redirect ke sign in
+      router.push("/signin");
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || "Terjadi kesalahan pada sistem.");
     } finally {
       setIsLoading(false);
     }
