@@ -114,17 +114,16 @@ function VerifyContent() {
     setErrorMsg("");
 
     try {
-      const res = await fetch("/api/auth/verify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, code }),
-      });
-      const data = await res.json();
-      
-      if (!res.ok) throw new Error(data.error || "Verifikasi gagal");
+      // Mock verifikasi OTP untuk keperluan UI lokal
+      if (code !== "123456") {
+        throw new Error("Kode verifikasi salah (Gunakan 123456 untuk tes)");
+      }
 
-      // Redirect ke halaman login setelah berhasil verifikasi
-      window.location.href = "/signin";
+      // Beri waktu delay buatan
+      await new Promise(resolve => setTimeout(resolve, 800));
+
+      // Redirect ke halaman dashboard setelah berhasil verifikasi
+      window.location.href = "/dashboard";
     } catch (err: any) {
       setShake(true);
       setErrorMsg(err.message);
@@ -158,6 +157,10 @@ function VerifyContent() {
         <p className="text-sm leading-relaxed text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
           {t.auth.verifySubtitle}{" "}
           <span className="font-semibold text-slate-700 dark:text-slate-300">{email}</span>
+          <br />
+          <span className="mt-2 block text-xs font-medium text-emerald-600 dark:text-emerald-400">
+            (Untuk keperluan tes, masukkan kode: 123456)
+          </span>
         </p>
       </motion.div>
 

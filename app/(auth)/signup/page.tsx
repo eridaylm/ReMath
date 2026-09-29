@@ -105,8 +105,11 @@ export default function SignUpPage() {
       // Beri waktu loading buatan sedikit
       await new Promise(resolve => setTimeout(resolve, 800));
 
-      // Redirect ke sign in
-      router.push("/signin");
+      // Tampilkan popup sukses
+      alert("Akun berhasil didaftarkan! Silakan masukkan kode verifikasi.");
+
+      // Redirect ke halaman verifikasi
+      router.push("/verify?email=" + encodeURIComponent(email.trim()));
     } catch (err: any) {
       setError(err.message || "Terjadi kesalahan pada sistem.");
     } finally {
