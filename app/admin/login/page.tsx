@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
+import Logo from '@/components/Logo';
 import { 
   Lock, 
   Mail, 
@@ -68,8 +69,8 @@ export default function AdminLoginPage() {
 
             {/* Header */}
             <div className="text-center mb-6">
-              <div className="mx-auto flex h-13 w-13 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 dark:bg-blue-950/60 dark:text-blue-400 mb-3 shadow-inner">
-                <ShieldCheck className="h-7 w-7" />
+              <div className="flex justify-center mb-4">
+                <Logo variant="full" size="md" href="/" />
               </div>
               <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
                 Admin Bank Soal

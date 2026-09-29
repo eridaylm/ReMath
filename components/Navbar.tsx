@@ -61,7 +61,14 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/90 transition-colors">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3.5 lg:px-8">
         {/* Brand Logo */}
-        <Logo />
+        <div className="flex items-center">
+          <div className="hidden sm:block">
+            <Logo variant="full" size="md" href="/" />
+          </div>
+          <div className="block sm:hidden">
+            <Logo variant="icon" size="sm" href="/" />
+          </div>
+        </div>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden items-center gap-1 md:flex">

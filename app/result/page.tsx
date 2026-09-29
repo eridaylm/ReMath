@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
+import Logo from '@/components/Logo';
 import { useLanguage } from '@/contexts/language-context';
 import { useTest } from '@/context/TestContext';
 import { SubTopic, SubTopicResult, MasteryStatus } from '@/types';
@@ -98,8 +99,8 @@ export default function ResultPage() {
         <Navbar />
         <main className="flex-1 flex items-center justify-center p-6">
           <div className="max-w-md w-full rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-lg dark:border-slate-800 dark:bg-slate-900">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-400 mb-4">
-              <BrainCircuit className="h-7 w-7" />
+            <div className="flex justify-center mb-5">
+              <Logo variant="full" size="md" href="/" />
             </div>
             <h2 className="text-xl font-bold text-slate-900 dark:text-white">
               {dict.resultPage.emptyState.title}
@@ -142,6 +143,15 @@ export default function ResultPage() {
 
       <main className="flex-1 pb-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pt-8">
+          {/* Printable Report Header */}
+          <div className="hidden print:flex items-center justify-between pb-6 mb-6 border-b border-slate-200">
+            <Logo variant="full" size="md" href="/" />
+            <div className="text-right text-xs text-slate-500">
+              <div className="font-bold text-slate-800">Laporan Hasil Diagnostik ReMath</div>
+              <div>{result.completedAt}</div>
+            </div>
+          </div>
+
           {/* Top Quick Actions Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 print:hidden">
             <div className="flex items-center gap-2">

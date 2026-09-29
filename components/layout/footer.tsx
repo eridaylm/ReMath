@@ -15,7 +15,7 @@ export default function Footer() {
     >
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:grid-cols-2 sm:gap-10 sm:px-6 sm:py-14 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] lg:px-8">
         <div>
-          <Logo href="/" textClassName="text-2xl" />
+          <Logo variant="full" size="sm" href="/" />
           <p className="mt-5 max-w-sm text-sm leading-7 text-slate-500 dark:text-slate-400">
             {t.footer.description}
           </p>

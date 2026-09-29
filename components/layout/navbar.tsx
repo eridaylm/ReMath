@@ -30,7 +30,22 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90 transition-colors">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8 lg:py-4">
-        <Logo href={isAuthenticated ? (user?.role === 'admin' ? '/admin/questions' : '/dashboard') : '/'} />
+        <div className="flex items-center">
+          <div className="hidden sm:block">
+            <Logo
+              variant="full"
+              size="md"
+              href={isAuthenticated ? (user?.role === 'admin' ? '/admin/questions' : '/dashboard') : '/'}
+            />
+          </div>
+          <div className="block sm:hidden">
+            <Logo
+              variant="icon"
+              size="sm"
+              href={isAuthenticated ? (user?.role === 'admin' ? '/admin/questions' : '/dashboard') : '/'}
+            />
+          </div>
+        </div>
 
         <nav className="hidden items-center gap-8 lg:flex">
           {navItems.map((item) => (

@@ -34,7 +34,7 @@ export default function AuthLayout({
 
         {/* Logo */}
         <div className="relative z-10">
-          <Logo href="/" textClassName="text-2xl text-white font-bold" />
+          <Logo variant="full" size="lg" href="/" textClassName="text-2xl text-white font-bold" />
         </div>
 
         {/* Center content */}
@@ -76,7 +76,7 @@ export default function AuthLayout({
         <div className="flex items-center justify-between px-4 py-3 sm:px-6 md:px-8">
           {/* Mobile logo */}
           <div className="lg:invisible">
-            <Logo href="/" />
+            <Logo variant="full" size="md" href="/" />
           </div>
 
           <div className="flex items-center gap-2 text-sm font-medium">

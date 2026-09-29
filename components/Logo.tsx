@@ -4,72 +4,119 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+export type LogoVariant = 'icon' | 'full';
+export type LogoSize = 'sm' | 'md' | 'lg';
+
 export interface LogoProps {
   /**
-   * Logo image path.
-   * Defaults to '/logo.png' (and supports '/logo.svg').
+   * Logo display variant:
+   * - 'full': Logo icon alongside styled brand typography
+   * - 'icon': Logo icon symbol only
+   * @default 'full'
    */
-  src?: string;
-  /** Width of the logo image in pixels (default: 38) */
-  width?: number;
-  /** Height of the logo image in pixels (default: 38, within 36px-40px range) */
-  height?: number;
+  variant?: LogoVariant;
+  /**
+   * Size scale for the logo:
+   * - 'sm': compact size for footers and mobile viewports
+   * - 'md': standard size for navbars and headers
+   * - 'lg': large prominent size for auth pages, landing, hero sections
+   * @default 'md'
+   */
+  size?: LogoSize;
   /** Custom classes for the outer wrapper */
   className?: string;
   /** Custom classes for the image element */
   imageClassName?: string;
-  /** Custom classes for the brand text */
+  /** Custom classes for the brand typography */
   textClassName?: string;
-  /** Brand text to display alongside the logo (default: 'Remath') */
+  /** Brand text to display alongside the logo (default: 'ReMath') */
   brandName?: string;
-  /** Whether to render the brand name text alongside the logo image */
-  showText?: boolean;
   /** Navigation destination when clicked (default: '/') */
   href?: string;
-  /** Prioritize image loading for above-the-fold navbar (default: true) */
+  /** Prioritize image loading for above-the-fold elements (default: true) */
   priority?: boolean;
+  /** Custom logo source path override (defaults to '/logo.svg') */
+  src?: string;
 }
 
+const SIZE_CONFIG: Record<
+  LogoSize,
+  {
+    iconWidth: number;
+    iconHeight: number;
+    imageClass: string;
+    textClass: string;
+    gapClass: string;
+  }
+> = {
+  sm: {
+    iconWidth: 26,
+    iconHeight: 30,
+    imageClass: 'h-7 w-auto',
+    textClass: 'text-base sm:text-lg font-bold',
+    gapClass: 'gap-2',
+  },
+  md: {
+    iconWidth: 32,
+    iconHeight: 36,
+    imageClass: 'h-8 sm:h-9 w-auto',
+    textClass: 'text-lg sm:text-xl font-extrabold',
+    gapClass: 'gap-2.5 sm:gap-3',
+  },
+  lg: {
+    iconWidth: 42,
+    iconHeight: 48,
+    imageClass: 'h-10 sm:h-12 w-auto',
+    textClass: 'text-2xl sm:text-3xl font-extrabold',
+    gapClass: 'gap-3 sm:gap-3.5',
+  },
+};
+
 export default function Logo({
-  src = '/logo.png',
-  width = 38,
-  height = 38,
+  variant = 'full',
+  size = 'md',
   className = '',
   imageClassName = '',
   textClassName = '',
-  brandName = 'Remath',
-  showText = true,
+  brandName = 'ReMath',
   href = '/',
   priority = true,
+  src,
 }: LogoProps) {
-  const [imgSrc, setImgSrc] = useState(src);
+  const initialSrc = src || '/logo.svg';
+  const [imgSrc, setImgSrc] = useState(initialSrc);
+  const sizeConfig = SIZE_CONFIG[size] || SIZE_CONFIG.md;
 
   const logoContent = (
-    <div className={`flex items-center gap-2.5 sm:gap-3 group ${className}`}>
-      {/* Logo Image */}
+    <div
+      className={`inline-flex items-center ${
+        variant === 'full' ? sizeConfig.gapClass : ''
+      } group select-none ${className}`}
+    >
+      {/* Crisp vector icon without blend/invert filters */}
       <div className="relative flex items-center justify-center shrink-0">
         <Image
           src={imgSrc}
           alt={`${brandName} Logo`}
-          width={width}
-          height={height}
+          width={sizeConfig.iconWidth}
+          height={sizeConfig.iconHeight}
           priority={priority}
-          className={`h-9 w-9 sm:h-10 sm:w-10 object-contain transition-transform duration-200 group-hover:scale-105 ${imageClassName}`}
+          className={`object-contain transition-transform duration-200 group-hover:scale-105 ${sizeConfig.imageClass} ${imageClassName}`}
           onError={() => {
-            // Automatic fallback between /logo.png and /logo.svg if needed
-            if (imgSrc === '/logo.png') {
-              setImgSrc('/logo.svg');
-            } else if (imgSrc === '/logo.svg') {
+            // Automatic fallback between /logo.svg and /logo.png
+            if (imgSrc === '/logo.svg') {
               setImgSrc('/logo.png');
+            } else if (imgSrc === '/logo.png') {
+              setImgSrc('/logo.svg');
             }
           }}
         />
       </div>
 
-      {/* Brand Name */}
-      {showText && (
+      {/* Styled brand typography for 'full' variant */}
+      {variant === 'full' && (
         <span
-          className={`text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white transition-colors duration-200 ${textClassName}`}
+          className={`tracking-tight text-slate-900 dark:text-white transition-colors duration-200 ${sizeConfig.textClass} ${textClassName}`}
         >
           {brandName}
         </span>
@@ -77,7 +124,6 @@ export default function Logo({
     </div>
   );
 
-  // Requirement 4: Ensure clicking the logo and brand name navigates back to homepage (/)
   if (href) {
     return (
       <Link

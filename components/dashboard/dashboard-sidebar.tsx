@@ -33,7 +33,7 @@ export default function DashboardSidebar() {
       {/* Desktop Sidebar */}
       <aside className="hidden w-[260px] flex-col border-r border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 lg:flex">
         <div className="mb-8 px-2">
-          <Logo href="/" />
+          <Logo variant="full" size="md" href="/" />
         </div>
 
         <nav className="space-y-1">

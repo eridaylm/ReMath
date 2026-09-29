@@ -6,6 +6,7 @@ import { useTest } from '@/context/TestContext';
 import { useLanguage } from '@/contexts/language-context';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
+import Logo from '@/components/Logo';
 import { SUBTOPICS_SEQUENCE } from '@/data/mockData';
 import {
   Timer,
@@ -114,8 +115,8 @@ export default function TestPage() {
               <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500" />
 
               <div className="text-center max-w-lg mx-auto mb-8">
-                <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25 mb-4">
-                  <BrainCircuit className="h-8 w-8" />
+                <div className="flex justify-center mb-5">
+                  <Logo variant="full" size="lg" href="/" />
                 </div>
                 <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
                   {t.testPage.onboarding.title}
@@ -257,6 +258,7 @@ export default function TestPage() {
             {/* Timer & Honesty Live Indicators */}
             <div className="mt-3 flex items-center justify-between pt-2.5 border-t border-slate-100 dark:border-slate-800/80 text-xs">
               <div className="flex items-center gap-3">
+                <Logo variant="icon" size="sm" href="/" className="hidden sm:inline-flex" />
                 <div className="flex items-center gap-1.5 font-mono font-bold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md">
                   <Timer className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
                   <span>{formatTimer(totalTimeSeconds)}</span>

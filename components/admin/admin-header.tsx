@@ -36,7 +36,14 @@ export default function AdminHeader() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         
         {/* Logo */}
-        <Logo href="/" />
+        <div className="flex items-center">
+          <div className="hidden sm:block">
+            <Logo variant="full" size="md" href="/" />
+          </div>
+          <div className="block sm:hidden">
+            <Logo variant="icon" size="sm" href="/" />
+          </div>
+        </div>
 
         {/* Right Section */}
         <div className="flex items-center gap-3 sm:gap-4">

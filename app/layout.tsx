@@ -14,6 +14,17 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "ReMath - Tes Diagnostik Matematika",
   description: "Platform diagnostik matematika adaptif untuk menemukan fondasi belajar sejati siswa jenjang SMA tanpa stigma.",
+  icons: {
+    icon: [
+      { url: "/logo.svg", type: "image/svg+xml" },
+      { url: "/logo.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/logo.png", sizes: "180x180", type: "image/png" },
+      { url: "/logo.svg", type: "image/svg+xml" },
+    ],
+    shortcut: ["/logo.svg"],
+  },
 };
 
 export default function RootLayout({
