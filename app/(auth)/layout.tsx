@@ -18,9 +18,9 @@ export default function AuthLayout({
       <div className="relative hidden w-[480px] flex-col justify-between overflow-hidden bg-gradient-to-br from-indigo-950 via-slate-900 to-violet-950 p-10 lg:flex xl:w-[520px] border-r border-slate-800/60">
         {/* Decorative pattern */}
         <div className="pointer-events-none absolute inset-0 opacity-100">
-          <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-blue-600/10 blur-3xl" />
-          <div className="absolute bottom-10 right-10 h-60 w-60 rounded-full bg-violet-600/10 blur-3xl" />
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-indigo-600/10 blur-3xl" />
+          <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-blue-600/10 blur-3xl animate-float" />
+          <div className="absolute bottom-10 right-10 h-60 w-60 rounded-full bg-violet-600/10 blur-3xl animate-float-delayed" />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-indigo-600/10 blur-3xl animate-float" style={{ animationDelay: '3s' }} />
           {/* Dot grid */}
           <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -40,9 +40,9 @@ export default function AuthLayout({
         {/* Center content */}
         <div className="relative z-10 space-y-6">
           <h2 className="text-3xl font-extrabold leading-tight text-white xl:text-4xl tracking-tight">
-            Ukur Potensi
+            {t.auth.brandTitle}
             <br />
-            <span className="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">Matematikamu.</span>
+            <span className="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">{t.auth.brandTitleHighlight}</span>
           </h2>
           <p className="max-w-sm text-base leading-relaxed text-indigo-200/80">
             {t.auth.brandTagline}
@@ -59,7 +59,7 @@ export default function AuthLayout({
               ))}
             </div>
             <p className="text-sm text-indigo-200/80">
-              <span className="font-bold text-white">50.000+</span> pengguna aktif
+              <span className="font-bold text-white">50.000+</span> {t.auth.activeUsers}
             </p>
           </div>
         </div>

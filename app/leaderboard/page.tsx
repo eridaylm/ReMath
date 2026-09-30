@@ -267,7 +267,7 @@ export default function LeaderboardPage() {
                       return (
                         <tr
                           key={entry.id}
-                          className={`hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition ${
+                          className={`animate-slide-in-right hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition ${
                             rank === 1
                               ? 'bg-amber-50/30 dark:bg-amber-950/10'
                               : rank === 2
@@ -276,6 +276,7 @@ export default function LeaderboardPage() {
                               ? 'bg-orange-50/30 dark:bg-orange-950/10'
                               : ''
                           }`}
+                          style={{ animationDelay: `${idx * 0.05}s` }}
                         >
                           {/* Rank */}
                           <td className="py-3.5 px-4 text-center whitespace-nowrap">

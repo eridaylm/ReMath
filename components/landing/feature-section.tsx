@@ -50,9 +50,9 @@ export default function FeatureSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ type: "spring", damping: 20, stiffness: 100, delay: index * 0.1 }}
-              className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:shadow-slate-800"
+              className="group hover-lift rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
             >
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl dark:bg-blue-900/30">
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl transition-all duration-300 group-hover:bg-blue-100 group-hover:shadow-md group-hover:shadow-blue-200/50 dark:bg-blue-900/30 dark:group-hover:bg-blue-900/50 dark:group-hover:shadow-blue-900/30">
                 {feature.icon}
               </div>
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white">

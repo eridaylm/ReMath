@@ -181,6 +181,9 @@ export const id = {
     copyright: "© 2026 ReMath. Semua hak dilindungi."
   },
   auth: {
+    brandTitle: "Ukur Potensi",
+    brandTitleHighlight: "Matematikamu.",
+    activeUsers: "pengguna aktif",
     brandTagline: "Platform cerdas untuk mengukur dan mengembangkan kecerdasan matematikamu.",
     // Sign In
     signInTitle: "Masuk ke Akunmu",

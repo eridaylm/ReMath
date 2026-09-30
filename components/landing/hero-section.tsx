@@ -67,6 +67,12 @@ export default function HeroSection() {
 
   return (
     <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.12),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(99,102,241,0.12),_transparent_35%)] dark:bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.05),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(99,102,241,0.05),_transparent_35%)]">
+      {/* Animated floating decorative blobs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="animate-float absolute -top-24 -left-24 h-64 w-64 rounded-full bg-blue-400/8 blur-3xl dark:bg-blue-500/5" />
+        <div className="animate-float-delayed absolute -bottom-20 -right-20 h-56 w-56 rounded-full bg-indigo-400/8 blur-3xl dark:bg-indigo-500/5" />
+        <div className="animate-float absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-80 w-80 rounded-full bg-violet-400/5 blur-3xl dark:bg-violet-500/3" style={{ animationDelay: '2s' }} />
+      </div>
       <motion.div 
         variants={containerVariants}
         initial="hidden"
@@ -92,7 +98,7 @@ export default function HeroSection() {
         <motion.div variants={itemVariants} className="mt-8 flex flex-wrap justify-center items-center gap-4">
           <Link
             href="/tes"
-            className="group flex items-center gap-2 rounded-md bg-gradient-to-r from-blue-600 to-indigo-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-100 dark:shadow-none transition hover:opacity-95"
+            className="group flex items-center gap-2 rounded-md bg-gradient-to-r from-blue-600 to-indigo-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-200 dark:shadow-none transition-all hover:shadow-xl hover:shadow-blue-200/80 hover:opacity-95 dark:hover:shadow-none"
           >
             {t.hero.startBtn}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

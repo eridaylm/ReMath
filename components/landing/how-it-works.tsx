@@ -69,10 +69,10 @@ export default function HowItWorks() {
             <motion.div
               variants={itemVariants}
               key={step.number}
-              className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+              className="group hover-lift rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
             >
               <div
-                className={`flex h-12 w-12 items-center justify-center rounded-full text-sm font-bold ${step.color}`}
+                className={`flex h-12 w-12 items-center justify-center rounded-full text-sm font-bold transition-all duration-300 group-hover:scale-110 ${step.color}`}
               >
                 {step.number}
               </div>

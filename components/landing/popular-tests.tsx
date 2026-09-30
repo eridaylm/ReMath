@@ -74,16 +74,16 @@ export default function PopularTests() {
             <motion.div
               variants={itemVariants}
               key={index}
-              className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:shadow-slate-800"
+              className="group hover-lift rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
             >
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl dark:bg-blue-900/30">
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl transition-all duration-300 group-hover:bg-blue-100 group-hover:shadow-md group-hover:shadow-blue-200/50 dark:bg-blue-900/30 dark:group-hover:bg-blue-900/50 dark:group-hover:shadow-blue-900/30">
                 {test.icon}
               </div>
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
                 {test.title}
               </h3>
               <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">{test.questions}</p>
-              <button className="mt-5 rounded-md border border-blue-200 px-4 py-2 text-sm font-semibold text-blue-600 transition hover:bg-blue-50 dark:border-blue-800 dark:text-blue-400 dark:hover:bg-blue-900/50 w-full md:w-auto">
+              <button className="mt-5 rounded-md border border-blue-200 px-4 py-2 text-sm font-semibold text-blue-600 transition-all duration-300 hover:bg-blue-50 group-hover:bg-blue-50 group-hover:border-blue-300 dark:border-blue-800 dark:text-blue-400 dark:hover:bg-blue-900/50 dark:group-hover:bg-blue-900/50 w-full md:w-auto">
                 {t.popularTests.startBtn}
               </button>
             </motion.div>

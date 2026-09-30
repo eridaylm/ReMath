@@ -23,8 +23,8 @@ export default function ContactPage() {
       <div className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
         {/* Background glow & gradients */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none">
-          <div className="absolute -top-32 left-1/4 w-96 h-96 bg-blue-500/20 dark:bg-blue-600/20 rounded-full blur-3xl opacity-50 mix-blend-multiply dark:mix-blend-lighten"></div>
-          <div className="absolute top-10 right-1/4 w-72 h-72 bg-indigo-500/20 dark:bg-indigo-600/20 rounded-full blur-3xl opacity-50 mix-blend-multiply dark:mix-blend-lighten"></div>
+          <div className="absolute -top-32 left-1/4 w-96 h-96 bg-blue-500/20 dark:bg-blue-600/20 rounded-full blur-3xl opacity-50 mix-blend-multiply dark:mix-blend-lighten animate-float"></div>
+          <div className="absolute top-10 right-1/4 w-72 h-72 bg-indigo-500/20 dark:bg-indigo-600/20 rounded-full blur-3xl opacity-50 mix-blend-multiply dark:mix-blend-lighten animate-float-delayed"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">

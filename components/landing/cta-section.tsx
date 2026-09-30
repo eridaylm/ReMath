@@ -20,8 +20,8 @@ export default function CtaSection() {
           className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-blue-50 to-indigo-50/30 border border-blue-100 px-8 py-12 shadow-sm dark:from-slate-800 dark:to-slate-900 dark:border-slate-800"
         >
           {/* Subtle background decoration */}
-          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-400/10 blur-3xl dark:bg-blue-500/10" />
-          <div className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-indigo-400/10 blur-3xl dark:bg-indigo-500/10" />
+          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-400/10 blur-3xl dark:bg-blue-500/10 animate-float" />
+          <div className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-indigo-400/10 blur-3xl dark:bg-indigo-500/10 animate-float-delayed" />
 
           <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between z-10">
             <div className="max-w-2xl">

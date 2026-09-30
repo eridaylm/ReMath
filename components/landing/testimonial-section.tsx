@@ -55,13 +55,13 @@ export default function TestimonialSection() {
             <motion.div
               variants={itemVariants}
               key={testimonial.name}
-              className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+              className="group hover-lift rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
             >
               <div className="flex items-center gap-4">
                 <img
                   src={testimonial.avatar}
                   alt={testimonial.name}
-                  className="h-14 w-14 rounded-full object-cover"
+                  className="h-14 w-14 rounded-full object-cover transition-transform duration-300 group-hover:scale-105 ring-2 ring-transparent group-hover:ring-blue-200 dark:group-hover:ring-blue-800"
                 />
                 <div>
                   <h3 className="font-semibold text-slate-900 dark:text-white">

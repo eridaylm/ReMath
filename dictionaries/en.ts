@@ -183,6 +183,9 @@ export const en: Dictionary = {
     copyright: "© 2026 ReMath. All rights reserved."
   },
   auth: {
+    brandTitle: "Measure Your Math",
+    brandTitleHighlight: "Potential.",
+    activeUsers: "active users",
     brandTagline: "The smart platform to measure and develop your mathematical intelligence.",
     // Sign In
     signInTitle: "Sign In to Your Account",

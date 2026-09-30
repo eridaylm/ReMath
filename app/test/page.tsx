@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useTest } from '@/context/TestContext';
 import { useLanguage } from '@/contexts/language-context';
@@ -495,76 +496,104 @@ export default function TestPage() {
       <Footer />
 
       {/* MODAL 1: KONFIRMASI MENYERAH / LOMPATI LEVEL */}
-      {showBypassModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-800 dark:bg-slate-900 text-center">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 mb-3">
-              <FastForward className="h-7 w-7" />
-            </div>
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-              {t.testPage.engine.modals.bypass.title.replace('{level}', currentLevel).replace('{subtopic}', currentSubTopic)}
-            </h3>
-            <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed text-left">
-              {t.testPage.engine.modals.bypass.descPart1}<span className="font-bold">{currentLevel}</span>{t.testPage.engine.modals.bypass.descPart2}
-            </p>
-            <div className="mt-6 flex items-center justify-center gap-2.5">
-              <button
-                type="button"
-                onClick={() => setShowBypassModal(false)}
-                className="flex-1 rounded-xl border border-slate-200 py-2.5 px-4 text-xs font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300"
-              >
-                {t.testPage.engine.modals.bypass.keepTryingBtn}
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowBypassModal(false);
-                  bypassCurrentLevel();
-                }}
-                className="flex-1 rounded-xl bg-amber-600 py-2.5 px-4 text-xs font-bold text-white hover:bg-amber-700 shadow-md shadow-amber-600/20"
-              >
-                {t.testPage.engine.modals.bypass.skipBtn}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {showBypassModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 10 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-800 dark:bg-slate-900 text-center"
+            >
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 mb-3">
+                <FastForward className="h-7 w-7" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                {t.testPage.engine.modals.bypass.title.replace('{level}', currentLevel).replace('{subtopic}', currentSubTopic)}
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed text-left">
+                {t.testPage.engine.modals.bypass.descPart1}<span className="font-bold">{currentLevel}</span>{t.testPage.engine.modals.bypass.descPart2}
+              </p>
+              <div className="mt-6 flex items-center justify-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => setShowBypassModal(false)}
+                  className="flex-1 rounded-xl border border-slate-200 py-2.5 px-4 text-xs font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300"
+                >
+                  {t.testPage.engine.modals.bypass.keepTryingBtn}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowBypassModal(false);
+                    bypassCurrentLevel();
+                  }}
+                  className="flex-1 rounded-xl bg-amber-600 py-2.5 px-4 text-xs font-bold text-white hover:bg-amber-700 shadow-md shadow-amber-600/20"
+                >
+                  {t.testPage.engine.modals.bypass.skipBtn}
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* MODAL 2: KONFIRMASI SELESAIKAN BLOK */}
-      {showSubmitModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-800 dark:bg-slate-900 text-center">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 mb-3">
-              <CheckCircle2 className="h-7 w-7" />
-            </div>
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-              {t.testPage.engine.modals.submit.title}
-            </h3>
-            <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              {t.testPage.engine.modals.submit.descPart1}<span className="font-bold text-blue-600">{answeredCountInBlock}</span>{t.testPage.engine.modals.submit.descPart2}<span className="font-bold">{currentLevel}</span>{t.testPage.engine.modals.submit.descPart3}
-            </p>
-            <div className="mt-6 flex items-center justify-center gap-2.5">
-              <button
-                type="button"
-                onClick={() => setShowSubmitModal(false)}
-                className="flex-1 rounded-xl border border-slate-200 py-2.5 px-4 text-xs font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300"
-              >
-                {t.testPage.engine.modals.submit.checkAgainBtn}
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowSubmitModal(false);
-                  submitCurrentBlock();
-                }}
-                className="flex-1 rounded-xl bg-blue-600 py-2.5 px-4 text-xs font-bold text-white hover:bg-blue-700 shadow-md shadow-blue-500/20"
-              >
-                {t.testPage.engine.modals.submit.submitBtn}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {showSubmitModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 10 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-800 dark:bg-slate-900 text-center"
+            >
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 mb-3">
+                <CheckCircle2 className="h-7 w-7" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                {t.testPage.engine.modals.submit.title}
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                {t.testPage.engine.modals.submit.descPart1}<span className="font-bold text-blue-600">{answeredCountInBlock}</span>{t.testPage.engine.modals.submit.descPart2}<span className="font-bold">{currentLevel}</span>{t.testPage.engine.modals.submit.descPart3}
+              </p>
+              <div className="mt-6 flex items-center justify-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => setShowSubmitModal(false)}
+                  className="flex-1 rounded-xl border border-slate-200 py-2.5 px-4 text-xs font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300"
+                >
+                  {t.testPage.engine.modals.submit.checkAgainBtn}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowSubmitModal(false);
+                    submitCurrentBlock();
+                  }}
+                  className="flex-1 rounded-xl bg-blue-600 py-2.5 px-4 text-xs font-bold text-white hover:bg-blue-700 shadow-md shadow-blue-500/20"
+                >
+                  {t.testPage.engine.modals.submit.submitBtn}
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
@@ -142,7 +143,12 @@ export default function ResultPage() {
       </div>
 
       <main className="flex-1 pb-20">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pt-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pt-8"
+        >
           {/* Printable Report Header */}
           <div className="hidden print:flex items-center justify-between pb-6 mb-6 border-b border-slate-200">
             <Logo variant="full" size="md" href="/" />
@@ -538,7 +544,7 @@ export default function ResultPage() {
               </Link>
             </div>
           </div>
-        </div>
+        </motion.div>
       </main>
 
       <div className="print:hidden">
