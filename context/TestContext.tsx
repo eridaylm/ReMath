@@ -341,7 +341,7 @@ export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const diagnosticOutput: DiagnosticResult = {
         id: `DIAG-${Date.now()}`,
         studentName: overrideName || studentName,
-        completedAt: new Date().toLocaleDateString('id-ID', {
+        completedAt: new Date().toLocaleDateString(language === 'en' ? 'en-US' : 'id-ID', {
           day: 'numeric',
           month: 'long',
           year: 'numeric',

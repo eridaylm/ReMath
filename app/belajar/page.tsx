@@ -26,7 +26,7 @@ export default function BelajarPage() {
     <div className="max-w-6xl mx-auto space-y-8 pt-4">
       <div>
         <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-          {dict.dashboard.learnPage.title.replace('{name}', user.firstName || user.username || 'Pelajar')}
+          {dict.dashboard.learnPage.title.replace('{name}', user.firstName || user.username || dict.dashboard.header.roleUser)}
         </h1>
         <p className="text-slate-500 dark:text-slate-400">{dict.dashboard.learnPage.subtitle}</p>
       </div>

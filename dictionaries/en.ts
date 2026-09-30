@@ -371,6 +371,22 @@ export const en: Dictionary = {
       "Improve Algebra score to 800",
       "Complete 100 practice questions"
     ],
+    recommendedTestsList: [
+      { title: "Algebra & Equations", duration: "20 Minutes" },
+      { title: "Visual Geometry", duration: "15 Minutes" },
+      { title: "Advanced Arithmetic", duration: "20 Minutes" },
+      { title: "Statistics & Data", duration: "15 Minutes" }
+    ],
+    topicScoresList: [
+      "Mathematical Logic",
+      "Arithmetic",
+      "Geometry",
+      "Algebra",
+      "Statistics & Data",
+      "Word Problems"
+    ],
+    recentTestsList: [
+    ],
     bottomBanner: {
       title: "You are amazing! 💪",
       subtitle: "Keep up the consistency and achieve your learning goals. We are ready to help you at any time.",
@@ -419,6 +435,13 @@ export const en: Dictionary = {
     }
   },
   testPage: {
+    subtopics: {
+      "Aljabar": "Algebra",
+      "Geometri": "Geometry",
+      "Kalkulus": "Calculus",
+      "Statistika": "Statistics",
+      "Aritmatika": "Arithmetic"
+    },
     onboarding: {
       title: "Adaptive Math Diagnostic Test",
       description: "Discover the true foundation of your math understanding without fear or judgment.",
@@ -541,9 +564,76 @@ export const en: Dictionary = {
   resultPage: {
     emptyState: {
       title: "No Diagnostic Data Yet",
-      description: "Please take the adaptive diagnostic test first, or load student simulation data to view this report layout.",
+      description: "Please take the adaptive diagnostic test first, or load a sample student result to see this report view.",
       startBtn: "Start Diagnostic Test",
-      loadSampleBtn: "Load Student Simulation Sample"
+      loadSampleBtn: "Load Sample Result"
+    },
+    header: {
+      reportTitle: "ReMath Diagnostic Result Report",
+      verifiedDiag: "Verified Diagnostic Completed",
+      printPdf: "Print / Download PDF",
+      retakeTest: "Retake Test"
+    },
+    supportiveHeader: {
+      holisticApproach: "Stigma-Free Holistic Approach",
+      strongestPillar: "Strongest Pillar:",
+      targetPolish: "Target Polish:",
+      participantProfile: "Diagnostic Participant Profile",
+      independentStudent: "Independent Student"
+    },
+    metrics: {
+      testedHonesty: "Tested Honesty",
+      times: "Times",
+      honestyDesc: "Chose \"Don't Know\" to prevent random guessing.",
+      totalTime: "Total Time",
+      timeDesc: "Adaptive completion efficiency across 5 sub-topics.",
+      smaMastered: "SMA Mastered",
+      smaDesc: "Sub-topics passed full high school standards.",
+      bridgeFoundation: "Bridge Foundation",
+      smpFoundation: "SMP Foundation:",
+      sdFoundation: "SD Foundation:",
+      sdRemedial: "SD Remedial:",
+      topics: "topics"
+    },
+    badgesEarned: "Learner Character Badges Earned",
+    skillTree: {
+      title: "Skill Map & Root Cause Analysis",
+      subtitle: "Tracking down to Elementary/Middle school levels why a High School topic feels confusing",
+      fiveDomains: "5 Complete Domains",
+      timeCompleted: "Time Completed:",
+      viewRootCause: "View Root Cause",
+      closeDetail: "Close Detail",
+      rootCauseTitle: "Root Cause Analysis",
+      keyPrerequisite: "Key Prerequisite Concept:",
+      priority: "Priority:",
+      priorityHigh: "High",
+      priorityMedium: "Medium",
+      priorityLow: "Low",
+      recommendedMicroModules: "Recommended interactive micro-modules to instantly close concept gaps:"
+    },
+    roadmap: {
+      title: "Action Plan & Personal Learning Path",
+      subtitle: "Systematic step-by-step to regain confidence in high school math",
+      step1Title: "Fix Unfinished Elementary & Middle School Foundations",
+      step1Desc: "Focus on topics with",
+      step1Desc2: "status first. Mastering simple fractions and algebraic terms takes an average of 3-5 hours of self-study.",
+      step2Title: "Build Conceptual Bridge from Middle to High School",
+      step2Desc: "Use the understanding of straight line gradients from Middle School to visually understand Calculus derivatives without blind memorization.",
+      step3Title: "Sharpen Higher Order Thinking Skills (HOTS) on Strong Domains",
+      step3Desc: "Maintain excellence in topics with",
+      step3Desc2: "status by exploring olympiad or state university selection questions."
+    },
+    footerBanner: {
+      title: "Ready to Measure Your Progress Again?",
+      subtitle: "You can retake the adaptive diagnostic test anytime to update your math foundation map.",
+      retakeBtn: "Start Retake Test",
+      leaderboardBtn: "View Leaderboard"
+    },
+    badges: {
+      mastered: "SMA Mastered (Strong Foundation)",
+      smp: "SMP Foundational (Needs SMA Review)",
+      sd: "SD Foundational (Needs SMP & SMA Review)",
+      remedial: "Needs Basic Remedial (Build SD Foundation)"
     }
   }
 };

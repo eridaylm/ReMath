@@ -27,16 +27,20 @@ export default function RecentTests() {
               <p className="text-[13px] font-bold text-slate-500 dark:text-slate-400">{dict.dashboard.recentTests.empty}</p>
            </div>
         ) : (
-          recentTests.map((test) => {
+          recentTests.map((test, index) => {
             const Icon = iconMap[test.icon] || BookOpen;
+            const translatedTest = (dict.dashboard.recentTestsList as any[])[index];
+            const displayTitle = translatedTest?.title || test.title;
+            const displayDate = translatedTest?.date || test.date;
+            
             return (
               <div key={test.title} className="flex items-center gap-4">
                 <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${test.color}`}>
                    <Icon className="h-5 w-5" strokeWidth={2} />
                 </div>
                 <div className="flex-1">
-                   <h4 className="text-[13px] font-bold text-slate-900 dark:text-white leading-tight">{test.title}</h4>
-                   <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 mt-0.5">{test.date}</p>
+                   <h4 className="text-[13px] font-bold text-slate-900 dark:text-white leading-tight">{displayTitle}</h4>
+                   <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 mt-0.5">{displayDate}</p>
                 </div>
                 <div className="text-right">
                    <p className="text-[17px] font-black text-slate-900 dark:text-white leading-none">{test.score}</p>

@@ -66,28 +66,28 @@ export default function ResultPage() {
         return (
           <span className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-100 px-3 py-1 text-xs font-extrabold text-emerald-800 border border-emerald-300 dark:bg-emerald-950/70 dark:text-emerald-300 dark:border-emerald-800">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            SMA Mastered (Fondasi Kuat)
+            {dict.resultPage.badges.mastered}
           </span>
         );
       case 'SMP_FOUNDATIONAL':
         return (
           <span className="inline-flex items-center gap-1.5 rounded-lg bg-amber-100 px-3 py-1 text-xs font-extrabold text-amber-900 border border-amber-300 dark:bg-amber-950/70 dark:text-amber-300 dark:border-amber-800">
             <span className="h-2 w-2 rounded-full bg-amber-500"></span>
-            SMP Foundational Level
+            {dict.resultPage.badges.smp}
           </span>
         );
       case 'SD_FOUNDATIONAL':
         return (
           <span className="inline-flex items-center gap-1.5 rounded-lg bg-orange-100 px-3 py-1 text-xs font-extrabold text-orange-900 border border-orange-300 dark:bg-orange-950/70 dark:text-orange-300 dark:border-orange-800">
             <span className="h-2 w-2 rounded-full bg-orange-500"></span>
-            SD Foundational Level
+            {dict.resultPage.badges.sd}
           </span>
         );
       case 'BASIC_REMEDIAL':
         return (
           <span className="inline-flex items-center gap-1.5 rounded-lg bg-rose-100 px-3 py-1 text-xs font-extrabold text-rose-900 border border-rose-300 dark:bg-rose-950/70 dark:text-rose-300 dark:border-rose-800">
             <span className="h-2 w-2 rounded-full bg-rose-500"></span>
-            Needs Basic Remedial
+            {dict.resultPage.badges.remedial}
           </span>
         );
     }
@@ -153,7 +153,7 @@ export default function ResultPage() {
           <div className="hidden print:flex items-center justify-between pb-6 mb-6 border-b border-slate-200">
             <Logo variant="full" size="md" href="/" />
             <div className="text-right text-xs text-slate-500">
-              <div className="font-bold text-slate-800">Laporan Hasil Diagnostik ReMath</div>
+              <div className="font-bold text-slate-800">{dict.resultPage.header.reportTitle}</div>
               <div>{result.completedAt}</div>
             </div>
           </div>
@@ -163,7 +163,7 @@ export default function ResultPage() {
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-md bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 text-xs font-bold text-emerald-800 dark:text-emerald-300">
                 <CheckCircle2 className="h-3.5 w-3.5" />
-                <span>Diagnostik Selesai Diverifikasi</span>
+                <span>{dict.resultPage.header.verifiedDiag}</span>
               </span>
               <span className="text-xs text-slate-400">•</span>
               <span className="text-xs text-slate-500">{result.completedAt}</span>
@@ -175,7 +175,7 @@ export default function ResultPage() {
                 className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 shadow-xs"
               >
                 <Printer className="h-3.5 w-3.5 text-slate-500" />
-                <span>Cetak / Unduh PDF</span>
+                <span>{dict.resultPage.header.printPdf}</span>
               </button>
 
               <button
@@ -183,7 +183,7 @@ export default function ResultPage() {
                 className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 shadow-sm"
               >
                 <RotateCcw className="h-3.5 w-3.5" />
-                <span>Ulangi Tes</span>
+                <span>{dict.resultPage.header.retakeTest}</span>
               </button>
             </div>
           </div>
@@ -194,7 +194,7 @@ export default function ResultPage() {
               <div className="max-w-2xl">
                 <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 dark:bg-blue-900/60 px-3 py-1 text-xs font-bold text-blue-800 dark:text-blue-300 mb-3">
                   <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500" />
-                  <span>Pendekatan Holistik Tanpa Stigma</span>
+                  <span>{dict.resultPage.supportiveHeader.holisticApproach}</span>
                 </div>
                 <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-snug">
                   {result.supportiveHeader.strengthHeadline}
@@ -204,12 +204,12 @@ export default function ResultPage() {
                 </p>
 
                 <div className="mt-5 flex flex-wrap items-center gap-2 text-xs">
-                  <span className="font-semibold text-slate-500 dark:text-slate-400">Pilar Terkuat:</span>
+                  <span className="font-semibold text-slate-500 dark:text-slate-400">{dict.resultPage.supportiveHeader.strongestPillar}</span>
                   <span className="rounded-lg bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 font-bold text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                     {result.supportiveHeader.keyStrengthSubtopic}
                   </span>
                   <span className="text-slate-300 dark:text-slate-700">•</span>
-                  <span className="font-semibold text-slate-500 dark:text-slate-400">Target Polesan:</span>
+                  <span className="font-semibold text-slate-500 dark:text-slate-400">{dict.resultPage.supportiveHeader.targetPolish}</span>
                   <span className="rounded-lg bg-amber-100 dark:bg-amber-950/60 px-2.5 py-1 font-bold text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
                     {result.supportiveHeader.focusGrowthSubtopic}
                   </span>
@@ -222,10 +222,10 @@ export default function ResultPage() {
                   {result.studentName ? result.studentName.charAt(0) : 'S'}
                 </div>
                 <div className="font-bold text-sm text-slate-900 dark:text-white">
-                  {result.studentName || 'Siswa Mandiri'}
+                  {result.studentName || dict.resultPage.supportiveHeader.independentStudent}
                 </div>
                 <div className="text-[11px] text-slate-400 mt-0.5">
-                  Profil Peserta Diagnostik
+                  {dict.resultPage.supportiveHeader.participantProfile}
                 </div>
               </div>
             </div>
@@ -236,64 +236,64 @@ export default function ResultPage() {
             {/* Honesty Badge */}
             <div className="rounded-2xl border border-amber-200 bg-amber-50/60 p-4.5 dark:border-amber-900/50 dark:bg-amber-950/30">
               <div className="flex items-center justify-between text-xs font-bold text-amber-800 dark:text-amber-300 mb-2">
-                <span>Kejujuran Teruji</span>
+                <span>{dict.resultPage.metrics.testedHonesty}</span>
                 <ShieldCheck className="h-4 w-4 text-amber-600" />
               </div>
               <div className="text-2xl font-extrabold text-amber-950 dark:text-amber-100">
-                {result.totalHonestyCount} Kali
+                {result.totalHonestyCount} {dict.resultPage.metrics.times}
               </div>
               <p className="mt-1 text-[11px] text-amber-700/90 dark:text-amber-400 leading-tight">
-                Memilih &quot;Tidak Tahu&quot; untuk mencegah tebakan acak.
+                {dict.resultPage.metrics.honestyDesc}
               </p>
             </div>
 
             {/* Total Time Badge */}
             <div className="rounded-2xl border border-blue-200 bg-blue-50/60 p-4.5 dark:border-blue-900/50 dark:bg-blue-950/30">
               <div className="flex items-center justify-between text-xs font-bold text-blue-800 dark:text-blue-300 mb-2">
-                <span>Total Waktu</span>
+                <span>{dict.resultPage.metrics.totalTime}</span>
                 <Timer className="h-4 w-4 text-blue-600" />
               </div>
               <div className="text-2xl font-extrabold text-blue-950 dark:text-blue-100 font-mono">
                 {formatSeconds(result.totalTimeSeconds)}
               </div>
               <p className="mt-1 text-[11px] text-blue-700/90 dark:text-blue-400 leading-tight">
-                Efisiensi penyelesaian adaptif 5 sub-topik.
+                {dict.resultPage.metrics.timeDesc}
               </p>
             </div>
 
             {/* SMA Mastered Count */}
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-4.5 dark:border-emerald-900/50 dark:bg-emerald-950/30">
               <div className="flex items-center justify-between text-xs font-bold text-emerald-800 dark:text-emerald-300 mb-2">
-                <span>SMA Mastered</span>
+                <span>{dict.resultPage.metrics.smaMastered}</span>
                 <Award className="h-4 w-4 text-emerald-600" />
               </div>
               <div className="text-2xl font-extrabold text-emerald-950 dark:text-emerald-100">
                 {masteredCount} / 5
               </div>
               <p className="mt-1 text-[11px] text-emerald-700/90 dark:text-emerald-400 leading-tight">
-                Sub-topik lulus standar penuh SMA.
+                {dict.resultPage.metrics.smaDesc}
               </p>
             </div>
 
             {/* SMP & SD Foundational Breakdown */}
             <div className="rounded-2xl border border-slate-200 bg-white p-4.5 dark:border-slate-800 dark:bg-slate-900 shadow-xs">
               <div className="flex items-center justify-between text-xs font-bold text-slate-600 dark:text-slate-300 mb-2">
-                <span>Fondasi Jembatan</span>
+                <span>{dict.resultPage.metrics.bridgeFoundation}</span>
                 <TrendingUp className="h-4 w-4 text-indigo-600" />
               </div>
               <div className="text-xs space-y-1 mt-1 font-semibold">
                 <div className="flex justify-between text-amber-700 dark:text-amber-400">
-                  <span>SMP Foundation:</span>
-                  <span>{smpCount} topik</span>
+                  <span>{dict.resultPage.metrics.smpFoundation}</span>
+                  <span>{smpCount} {dict.resultPage.metrics.topics}</span>
                 </div>
                 <div className="flex justify-between text-orange-700 dark:text-orange-400">
-                  <span>SD Foundation:</span>
-                  <span>{sdCount} topik</span>
+                  <span>{dict.resultPage.metrics.sdFoundation}</span>
+                  <span>{sdCount} {dict.resultPage.metrics.topics}</span>
                 </div>
                 {remedialCount > 0 && (
                   <div className="flex justify-between text-rose-600">
-                    <span>Remedial SD:</span>
-                    <span>{remedialCount} topik</span>
+                    <span>{dict.resultPage.metrics.sdRemedial}</span>
+                    <span>{remedialCount} {dict.resultPage.metrics.topics}</span>
                   </div>
                 )}
               </div>
@@ -305,7 +305,7 @@ export default function ResultPage() {
             <div className="mb-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3 flex items-center gap-1.5">
                 <Sparkles className="h-4 w-4 text-amber-500" />
-                <span>Lencana Karakter Pembelajar yang Diraih</span>
+                <span>{dict.resultPage.badgesEarned}</span>
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {result.badges.map((b) => (
@@ -335,13 +335,13 @@ export default function ResultPage() {
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
-                  Peta Kemampuan &amp; Analisis Akar Masalah
+                  {dict.resultPage.skillTree.title}
                 </h2>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Melacak hingga ke tingkat SD/SMP mengapa suatu materi SMA terasa membingungkan
+                  {dict.resultPage.skillTree.subtitle}
                 </p>
               </div>
-              <span className="text-xs text-slate-400 font-medium">5 Domain Lengkap</span>
+              <span className="text-xs text-slate-400 font-medium">{dict.resultPage.skillTree.fiveDomains}</span>
             </div>
 
             <div className="space-y-4">
@@ -377,7 +377,7 @@ export default function ResultPage() {
 
                       <div className="flex items-center justify-between sm:justify-end gap-5 pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
                         <div className="text-left sm:text-right">
-                          <span className="text-[11px] text-slate-400 block">Waktu Selesai:</span>
+                          <span className="text-[11px] text-slate-400 block">{dict.resultPage.skillTree.timeCompleted}</span>
                           <span className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200">
                             {formatSeconds(res.timeSpentSeconds)}
                           </span>
@@ -385,7 +385,7 @@ export default function ResultPage() {
 
                         <div className="flex items-center gap-2">
                           <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">
-                            {isExpanded ? 'Tutup Detail' : 'Lihat Akar Masalah'}
+                            {isExpanded ? dict.resultPage.skillTree.closeDetail : dict.resultPage.skillTree.viewRootCause}
                           </span>
                           {isExpanded ? (
                             <ChevronUp className="h-4 w-4 text-blue-600" />
@@ -405,13 +405,13 @@ export default function ResultPage() {
                             <AlertTriangle className="h-5 w-5 shrink-0 text-amber-600 mt-0.5" />
                             <div>
                               <h4 className="text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300">
-                                Diagnosa Akar Masalah (Root Cause Analysis)
+                                {dict.resultPage.skillTree.rootCauseTitle}
                               </h4>
                               <p className="mt-1 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
                                 {res.rootCauseAnalysis.description}
                               </p>
                               <div className="mt-2.5 flex items-baseline gap-1.5 text-xs text-amber-900 dark:text-amber-200 font-medium">
-                                <span className="font-bold">Konsep Prasyarat Kunci:</span>
+                                <span className="font-bold">{dict.resultPage.skillTree.keyPrerequisite}</span>
                                 <span>{res.rootCauseAnalysis.missingPrerequisite}</span>
                               </div>
                             </div>
@@ -427,19 +427,19 @@ export default function ResultPage() {
                             </div>
                             <span
                               className={`rounded px-2 py-0.5 text-[10px] font-bold ${
-                                res.recommendation.priority === 'Tinggi'
+                                res.recommendation.priority === 'Tinggi' || res.recommendation.priority === 'High'
                                   ? 'bg-rose-100 text-rose-700'
-                                  : res.recommendation.priority === 'Sedang'
+                                  : res.recommendation.priority === 'Sedang' || res.recommendation.priority === 'Medium'
                                   ? 'bg-amber-100 text-amber-700'
                                   : 'bg-emerald-100 text-emerald-700'
                               }`}
                             >
-                              Prioritas: {res.recommendation.priority}
+                              {dict.resultPage.skillTree.priority} {res.recommendation.priority === 'Tinggi' ? dict.resultPage.skillTree.priorityHigh : res.recommendation.priority === 'Sedang' ? dict.resultPage.skillTree.priorityMedium : res.recommendation.priority === 'Rendah' ? dict.resultPage.skillTree.priorityLow : res.recommendation.priority}
                             </span>
                           </div>
 
                           <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
-                            Modul mikro interaktif yang direkomendasikan untuk menutup celah konsep secara instan:
+                            {dict.resultPage.skillTree.recommendedMicroModules}
                           </p>
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -470,10 +470,10 @@ export default function ResultPage() {
               </div>
               <div>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                  Rencana Aksi &amp; Jalur Belajar Personal
+                  {dict.resultPage.roadmap.title}
                 </h3>
                 <p className="text-xs text-slate-500">
-                  Langkah sistematis berjenjang agar siswa SMA kembali percaya diri dalam matematika
+                  {dict.resultPage.roadmap.subtitle}
                 </p>
               </div>
             </div>
@@ -488,10 +488,10 @@ export default function ResultPage() {
                   1
                 </div>
                 <h4 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">
-                  Perbaiki Fondasi SD &amp; SMP yang Teridentifikasi Belum Tuntas
+                  {dict.resultPage.roadmap.step1Title}
                 </h4>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
-                  Fokus pada topik berstatus <span className="font-semibold text-rose-600">Needs Remedial</span> atau <span className="font-semibold text-orange-600">SD Foundation</span> terlebih dahulu. Menguasai operasi pecahan dan suku aljabar sederhana membutuhkan waktu rata-rata 3-5 jam belajar mandiri.
+                  {dict.resultPage.roadmap.step1Desc} <span className="font-semibold text-rose-600">Needs Remedial</span> atau <span className="font-semibold text-orange-600">SD Foundation</span> {dict.resultPage.roadmap.step1Desc2}
                 </p>
               </div>
 
@@ -501,10 +501,10 @@ export default function ResultPage() {
                   2
                 </div>
                 <h4 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">
-                  Bangun Jembatan Konseptual SMP ke SMA
+                  {dict.resultPage.roadmap.step2Title}
                 </h4>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
-                  Gunakan pemahaman kemiringan gradien garis lurus SMP untuk memahami konsep turunan kalkulus SMA secara visual tanpa rumus hafalan buta.
+                  {dict.resultPage.roadmap.step2Desc}
                 </p>
               </div>
 
@@ -514,10 +514,10 @@ export default function ResultPage() {
                   3
                 </div>
                 <h4 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">
-                  Asah Soal Tingkat Tinggi (HOTS) pada Domain Unggulan
+                  {dict.resultPage.roadmap.step3Title}
                 </h4>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
-                  Pertahankan keunggulan pada topik yang berstatus <span className="font-semibold text-emerald-600">SMA Mastered</span> dengan mengeksplorasi soal olimpiade atau seleksi perguruan tinggi negeri.
+                  {dict.resultPage.roadmap.step3Desc} <span className="font-semibold text-emerald-600">SMA Mastered</span> {dict.resultPage.roadmap.step3Desc2}
                 </p>
               </div>
             </div>
@@ -525,22 +525,22 @@ export default function ResultPage() {
 
           {/* Action Footer Banner */}
           <div className="rounded-2xl bg-gradient-to-br from-white/80 to-blue-50/80 dark:from-slate-900/80 dark:to-blue-950/40 backdrop-blur-md border border-blue-200 dark:border-blue-800 p-6 sm:p-8 text-center shadow-sm print:hidden">
-            <h3 className="text-xl font-bold text-blue-950 dark:text-white">Siap Mengukur Kembali Perkembanganmu?</h3>
+            <h3 className="text-xl font-bold text-blue-950 dark:text-white">{dict.resultPage.footerBanner.title}</h3>
             <p className="mt-1.5 text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
-              Kamu bisa mengulang tes diagnostik adaptif kapan saja untuk memperbarui peta fondasi matematika kamu.
+              {dict.resultPage.footerBanner.subtitle}
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <button
                 onClick={handleRetake}
                 className="rounded-xl bg-blue-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-sm hover:bg-blue-700 transition"
               >
-                Mulai Tes Ulang
+                {dict.resultPage.footerBanner.retakeBtn}
               </button>
               <Link
                 href="/leaderboard"
                 className="rounded-xl border border-slate-300 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 px-5 py-2.5 text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
               >
-                Lihat Papan Peringkat
+                {dict.resultPage.footerBanner.leaderboardBtn}
               </Link>
             </div>
           </div>

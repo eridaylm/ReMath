@@ -37,6 +37,9 @@ export default function RecommendedTests() {
       >
         {recommendedTests.map((test) => {
           const Icon = iconMap[test.icon] || BarChart3;
+          const translatedTest = dict.dashboard.recommendedTestsList[test.id - 1];
+          const displayTitle = translatedTest?.title || test.title;
+          const displayDuration = translatedTest?.duration || test.duration;
           
           return (
             <div
@@ -51,10 +54,10 @@ export default function RecommendedTests() {
                 </div>
                 <div className="flex-1">
                   <h4 className="text-[13px] font-bold text-slate-900 dark:text-white leading-tight">
-                    {test.title}
+                    {displayTitle}
                   </h4>
                   <p className="mt-1 text-[11px] font-medium text-slate-500 dark:text-slate-400">
-                    {test.questions} {dict.dashboard.recommendedTests.questions} • {test.duration}
+                    {test.questions} {dict.dashboard.recommendedTests.questions} • {displayDuration}
                   </p>
                 </div>
               </div>

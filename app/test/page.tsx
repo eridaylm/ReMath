@@ -9,6 +9,7 @@ import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
 import Logo from '@/components/Logo';
 import { SUBTOPICS_SEQUENCE } from '@/data/mockData';
+import { questionsEn } from '@/data/questionsEn';
 import {
   Timer,
   ShieldCheck,
@@ -83,6 +84,14 @@ export default function TestPage() {
   ).length;
 
   const currentSelected = currentQuestion ? selectedAnswers[currentQuestion.id] : undefined;
+  const { language } = useLanguage();
+  const getTranslatedQuestion = (q: any) => {
+    if (language === 'en' && questionsEn[q.id]) {
+      return { ...q, ...questionsEn[q.id] };
+    }
+    return q;
+  };
+  const translatedCurrentQuestion = currentQuestion ? getTranslatedQuestion(currentQuestion) : null;
 
   // Level Styling helpers
   const levelBadgeConfig = {
@@ -245,7 +254,7 @@ export default function TestPage() {
                     >
                       {isPassed ? <CheckCircle2 className="h-3 w-3" /> : idx + 1}
                     </span>
-                    <span>{topic}</span>
+                    <span>{t.testPage.subtopics[topic] || topic}</span>
                     {isPassed && completedResult && (
                       <span className="text-[9px] px-1 py-0.2 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-mono">
                         {completedResult.levelReached}
@@ -266,7 +275,9 @@ export default function TestPage() {
                 </div>
                 <div className="hidden sm:flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
                   <span>{t.testPage.engine.tracker.participant}</span>
-                  <span className="font-semibold text-slate-800 dark:text-slate-200">{studentName}</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">
+                    {studentName === 'Siswa Mandiri' || studentName === 'Independent Student' ? (language === 'en' ? 'Independent Student' : 'Siswa Mandiri') : studentName}
+                  </span>
                 </div>
               </div>
 
@@ -293,7 +304,7 @@ export default function TestPage() {
               <div>
                 <div className="flex items-center gap-2 mb-1.5">
                   <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-                    {t.testPage.engine.header.subtopicLabel} {currentSubTopic}
+                    {t.testPage.engine.header.subtopicLabel} {t.testPage.subtopics[currentSubTopic] || currentSubTopic}
                   </span>
                   <span className="text-slate-300 dark:text-slate-700">•</span>
                   <span className={`inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-bold border ${levelBadgeConfig.badgeClass}`}>
@@ -364,9 +375,9 @@ export default function TestPage() {
                     {t.testPage.engine.question.questionOf.replace('{current}', String(currentQuestionIndex + 1)).replace('{total}', String(currentBlockQuestions.length))}
                   </span>
                 </div>
-                {currentQuestion.conceptTag && (
+                {translatedCurrentQuestion.conceptTag && (
                   <span className="rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-300">
-                    {currentQuestion.conceptTag}
+                    {translatedCurrentQuestion.conceptTag} (ID: {currentQuestion.id}, EN keys: {Object.keys(questionsEn).length})
                   </span>
                 )}
               </div>
@@ -374,19 +385,19 @@ export default function TestPage() {
               {/* Question Text */}
               <div className="my-5">
                 <p className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white leading-relaxed">
-                  {currentQuestion.question}
+                  {translatedCurrentQuestion.question}
                 </p>
-                {currentQuestion.hint && (
+                {translatedCurrentQuestion.hint && (
                   <div className="mt-3 flex items-start gap-2 rounded-xl bg-blue-50/60 p-3 text-xs text-blue-800 dark:bg-blue-950/20 dark:text-blue-300 border border-blue-100 dark:border-blue-900/40">
                     <Info className="h-4 w-4 shrink-0 mt-0.5" />
-                    <span>{t.testPage.engine.question.hintPrefix} {currentQuestion.hint}</span>
+                    <span>{t.testPage.engine.question.hintPrefix} {translatedCurrentQuestion.hint}</span>
                   </div>
                 )}
               </div>
 
               {/* Multiple Choice Options (A, B, C, D) */}
               <div className="space-y-3 mt-6">
-                {currentQuestion.options.map((optionText, optIdx) => {
+                {translatedCurrentQuestion.options.map((optionText: string, optIdx: number) => {
                   const isSelected = currentSelected === optIdx;
                   const letter = ['A', 'B', 'C', 'D'][optIdx];
 

@@ -369,6 +369,22 @@ export const id = {
       "Tingkatkan skor Aljabar ke 800",
       "Kerjakan 100 soal latihan"
     ],
+    recommendedTestsList: [
+      { title: "Aljabar & Persamaan", duration: "20 Menit" },
+      { title: "Geometri Visual", duration: "15 Menit" },
+      { title: "Aritmetika Lanjutan", duration: "20 Menit" },
+      { title: "Statistika & Data", duration: "15 Menit" }
+    ],
+    topicScoresList: [
+      "Logika Matematika",
+      "Aritmetika",
+      "Geometri",
+      "Aljabar",
+      "Statistika & Data",
+      "Soal Cerita"
+    ],
+    recentTestsList: [
+    ],
     bottomBanner: {
       title: "Kamu luar biasa! 💪",
       subtitle: "Terus pertahankan konsistensimu dan capai tujuan belajarmu. Kami siap membantumu setiap saat.",
@@ -417,6 +433,13 @@ export const id = {
     }
   },
   testPage: {
+    subtopics: {
+      "Aljabar": "Aljabar",
+      "Geometri": "Geometri",
+      "Kalkulus": "Kalkulus",
+      "Statistika": "Statistika",
+      "Aritmatika": "Aritmatika"
+    },
     onboarding: {
       title: "Tes Diagnostik Matematika Adaptif",
       description: "Menemukan fondasi pemahaman matematika sejati kamu tanpa rasa takut atau penghakiman.",
@@ -542,6 +565,73 @@ export const id = {
       description: "Silakan ikuti tes diagnostik adaptif terlebih dahulu, atau muat data simulasi siswa untuk melihat tampilan laporan ini.",
       startBtn: "Mulai Tes Diagnostik",
       loadSampleBtn: "Muat Contoh Hasil Simulasi Siswa"
+    },
+    header: {
+      reportTitle: "Laporan Hasil Diagnostik ReMath",
+      verifiedDiag: "Diagnostik Selesai Diverifikasi",
+      printPdf: "Cetak / Unduh PDF",
+      retakeTest: "Ulangi Tes"
+    },
+    supportiveHeader: {
+      holisticApproach: "Pendekatan Holistik Tanpa Stigma",
+      strongestPillar: "Pilar Terkuat:",
+      targetPolish: "Target Polesan:",
+      participantProfile: "Profil Peserta Diagnostik",
+      independentStudent: "Siswa Mandiri"
+    },
+    metrics: {
+      testedHonesty: "Kejujuran Teruji",
+      times: "Kali",
+      honestyDesc: "Memilih \"Tidak Tahu\" untuk mencegah tebakan acak.",
+      totalTime: "Total Waktu",
+      timeDesc: "Efisiensi penyelesaian adaptif 5 sub-topik.",
+      smaMastered: "SMA Mastered",
+      smaDesc: "Sub-topik lulus standar penuh SMA.",
+      bridgeFoundation: "Fondasi Jembatan",
+      smpFoundation: "SMP Foundation:",
+      sdFoundation: "SD Foundation:",
+      sdRemedial: "Remedial SD:",
+      topics: "topik"
+    },
+    badgesEarned: "Lencana Karakter Pembelajar yang Diraih",
+    skillTree: {
+      title: "Peta Kemampuan & Analisis Akar Masalah",
+      subtitle: "Melacak hingga ke tingkat SD/SMP mengapa suatu materi SMA terasa membingungkan",
+      fiveDomains: "5 Domain Lengkap",
+      timeCompleted: "Waktu Selesai:",
+      viewRootCause: "Lihat Akar Masalah",
+      closeDetail: "Tutup Detail",
+      rootCauseTitle: "Diagnosa Akar Masalah (Root Cause Analysis)",
+      keyPrerequisite: "Konsep Prasyarat Kunci:",
+      priority: "Prioritas:",
+      priorityHigh: "Tinggi",
+      priorityMedium: "Sedang",
+      priorityLow: "Rendah",
+      recommendedMicroModules: "Modul mikro interaktif yang direkomendasikan untuk menutup celah konsep secara instan:"
+    },
+    roadmap: {
+      title: "Rencana Aksi & Jalur Belajar Personal",
+      subtitle: "Langkah sistematis berjenjang agar siswa SMA kembali percaya diri dalam matematika",
+      step1Title: "Perbaiki Fondasi SD & SMP yang Teridentifikasi Belum Tuntas",
+      step1Desc: "Fokus pada topik berstatus",
+      step1Desc2: "terlebih dahulu. Menguasai operasi pecahan dan suku aljabar sederhana membutuhkan waktu rata-rata 3-5 jam belajar mandiri.",
+      step2Title: "Bangun Jembatan Konseptual SMP ke SMA",
+      step2Desc: "Gunakan pemahaman kemiringan gradien garis lurus SMP untuk memahami konsep turunan kalkulus SMA secara visual tanpa rumus hafalan buta.",
+      step3Title: "Asah Soal Tingkat Tinggi (HOTS) pada Domain Unggulan",
+      step3Desc: "Pertahankan keunggulan pada topik yang berstatus",
+      step3Desc2: "dengan mengeksplorasi soal olimpiade atau seleksi perguruan tinggi negeri."
+    },
+    footerBanner: {
+      title: "Siap Mengukur Kembali Perkembanganmu?",
+      subtitle: "Kamu bisa mengulang tes diagnostik adaptif kapan saja untuk memperbarui peta fondasi matematika kamu.",
+      retakeBtn: "Mulai Tes Ulang",
+      leaderboardBtn: "Lihat Papan Peringkat"
+    },
+    badges: {
+      mastered: "SMA Mastered (Fondasi Kuat)",
+      smp: "SMP Foundational Level (Perlu Review SMA)",
+      sd: "SD Foundational Level (Perlu Review SMP & SMA)",
+      remedial: "Needs Basic Remedial (Fondasi SD Perlu Dibangun)"
     }
   }
 };

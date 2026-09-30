@@ -93,7 +93,7 @@ export default function Navbar() {
                 </div>
                 <div className="flex flex-col text-left">
                   <span className="text-sm font-bold text-slate-900 dark:text-white leading-tight">{user.username || user.firstName || user.name.split(' ')[0]}</span>
-                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400 capitalize">{user.role === 'user' ? 'Pelajar' : 'Administrator'}</span>
+                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400 capitalize">{user.role === 'user' ? t.dashboard.header.roleUser : t.dashboard.header.roleAdmin}</span>
                 </div>
                 <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform ${profileOpen ? 'rotate-180' : ''}`} />
               </button>
