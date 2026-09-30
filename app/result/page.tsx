@@ -37,7 +37,7 @@ import Link from 'next/link';
 
 export default function ResultPage() {
   const router = useRouter();
-  const { t: dict } = useLanguage();
+  const { t: dict, language } = useLanguage();
   const { latestResult, loadSampleResult, resetTest } = useTest();
   const [expandedTopic, setExpandedTopic] = useState<SubTopic | null>(null);
 
