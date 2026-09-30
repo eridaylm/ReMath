@@ -207,12 +207,12 @@ export default function ResultPage() {
                 <div className="mt-5 flex flex-wrap items-center gap-2 text-xs">
                   <span className="font-semibold text-slate-500 dark:text-slate-400">{dict.resultPage.supportiveHeader.strongestPillar}</span>
                   <span className="rounded-lg bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 font-bold text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                    {result.supportiveHeader.keyStrengthSubtopic}
+                    {dict.testPage.subtopics[result.supportiveHeader.keyStrengthSubtopic as keyof typeof dict.testPage.subtopics] || result.supportiveHeader.keyStrengthSubtopic}
                   </span>
                   <span className="text-slate-300 dark:text-slate-700">•</span>
                   <span className="font-semibold text-slate-500 dark:text-slate-400">{dict.resultPage.supportiveHeader.targetPolish}</span>
                   <span className="rounded-lg bg-amber-100 dark:bg-amber-950/60 px-2.5 py-1 font-bold text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
-                    {result.supportiveHeader.focusGrowthSubtopic}
+                    {dict.testPage.subtopics[result.supportiveHeader.focusGrowthSubtopic as keyof typeof dict.testPage.subtopics] || result.supportiveHeader.focusGrowthSubtopic}
                   </span>
                 </div>
               </div>
@@ -430,7 +430,7 @@ export default function ResultPage() {
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-2 text-xs font-bold text-slate-800 dark:text-slate-200">
                               <BookOpen className="h-4 w-4 text-blue-600" />
-                              <span>{language === 'en' ? `Conceptual Recovery Recommendation for ${res.subtopic}` : res.recommendation.actionTitle}</span>
+                              <span>{language === 'en' ? `Conceptual Recovery Recommendation for ${dict.testPage.subtopics[res.subtopic as keyof typeof dict.testPage.subtopics] || res.subtopic}` : res.recommendation.actionTitle}</span>
                             </div>
                             <span
                               className={`rounded px-2 py-0.5 text-[10px] font-bold ${
@@ -500,7 +500,7 @@ export default function ResultPage() {
                   {dict.resultPage.roadmap.step1Title}
                 </h4>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
-                  {dict.resultPage.roadmap.step1Desc} <span className="font-semibold text-rose-600">Needs Remedial</span> atau <span className="font-semibold text-orange-600">SD Foundation</span> {dict.resultPage.roadmap.step1Desc2}
+                  {dict.resultPage.roadmap.step1Desc} <span className="font-semibold text-rose-600">Needs Remedial</span> {language === 'en' ? 'or' : 'atau'} <span className="font-semibold text-orange-600">SD Foundation</span> {dict.resultPage.roadmap.step1Desc2}
                 </p>
               </div>
 
