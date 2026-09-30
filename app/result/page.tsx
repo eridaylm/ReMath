@@ -137,6 +137,17 @@ export default function ResultPage() {
   const sdCount = resultsList.filter((r) => r.status === 'SD_FOUNDATIONAL').length;
   const remedialCount = resultsList.filter((r) => r.status === 'BASIC_REMEDIAL').length;
 
+  const timestamp = parseInt(result.id.replace('DIAG-', ''), 10);
+  const formattedDate = !isNaN(timestamp) 
+    ? new Date(timestamp).toLocaleDateString(language === 'en' ? 'en-US' : 'id-ID', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    : result.completedAt;
+
   const strengthStr = dict.testPage.subtopics[result.supportiveHeader.keyStrengthSubtopic as keyof typeof dict.testPage.subtopics] || result.supportiveHeader.keyStrengthSubtopic;
   const focusStr = dict.testPage.subtopics[result.supportiveHeader.focusGrowthSubtopic as keyof typeof dict.testPage.subtopics] || result.supportiveHeader.focusGrowthSubtopic;
 
@@ -215,7 +226,7 @@ export default function ResultPage() {
             <Logo variant="full" size="md" href="/" />
             <div className="text-right text-xs text-slate-500">
               <div className="font-bold text-slate-800">{dict.resultPage.header.reportTitle}</div>
-              <div>{result.completedAt}</div>
+              <div>{formattedDate}</div>
             </div>
           </div>
 
@@ -227,7 +238,7 @@ export default function ResultPage() {
                 <span>{dict.resultPage.header.verifiedDiag}</span>
               </span>
               <span className="text-xs text-slate-400">•</span>
-              <span className="text-xs text-slate-500">{result.completedAt}</span>
+              <span className="text-xs text-slate-500">{formattedDate}</span>
             </div>
 
             <div className="flex items-center gap-2">
