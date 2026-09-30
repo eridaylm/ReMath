@@ -250,5 +250,68 @@ export const questionsEn: Record<string, any> = {
     explanation: 'Total = 10 + 15 + 5 + 20 = 50 books.',
     conceptTag: 'Bar Chart Interpretation (Elementary)',
     hint: 'Add up the number of books sold each day.'
+  },
+  'ARI-SMA-01': {
+    question: 'The sum to infinity of the geometric series: 18 + 6 + 2 + 2/3 + ... is...',
+    options: ['27', '24', '36', '54'],
+    explanation: 'First term a = 18. Ratio r = 6/18 = 1/3. Infinite geometric series sum formula S∞ = a / (1 - r) = 18 / (1 - 1/3) = 18 / (2/3) = 18 × (3/2) = 27.',
+    conceptTag: 'Infinite Geometric Series (High School)',
+    hint: 'Use the formula S∞ = a / (1 - r) with condition -1 < r < 1.'
+  },
+  'ARI-SMA-02': {
+    question: 'The value of ²log 24 + ²log 6 - ²log 9 is...',
+    options: ['4', '3', '5', '6'],
+    explanation: 'Use logarithm properties: log a + log b - log c = log (a · b / c). So ²log (24 × 6 / 9) = ²log (144 / 9) = ²log 16 = 4 because 2⁴ = 16.',
+    conceptTag: 'Logarithm Operation Properties (High School)',
+    hint: 'Logarithm addition is equivalent to argument multiplication, subtraction to division.'
+  },
+  'ARI-SMA-03': {
+    question: 'A capital of Rp5,000,000.00 is saved with a compound interest of 10% per year. The total savings after 2 years is...',
+    options: ['Rp6,050,000.00', 'Rp6,000,000.00', 'Rp5,500,000.00', 'Rp6,100,000.00'],
+    explanation: 'Compound interest formula Mn = M(1 + i)^n = 5,000,000 × (1 + 0.10)² = 5,000,000 × (1.1)² = 5,000,000 × 1.21 = Rp6,050,000.00.',
+    conceptTag: 'Financial Arithmetic Compound Interest (High School)',
+    hint: 'In compound interest, the next period\'s interest is calculated from the capital that has earned interest.'
+  },
+  'ARI-SMP-01': {
+    question: 'The 25th term of the arithmetic sequence 5, 9, 13, 17, ... is...',
+    options: ['101', '97', '105', '93'],
+    explanation: 'First term a = 5, difference b = 9 - 5 = 4. N-th term formula: Un = a + (n - 1)b. U₂₅ = 5 + (25 - 1)4 = 5 + 24(4) = 5 + 96 = 101.',
+    conceptTag: 'N-th Term Arithmetic Sequence (Middle School)',
+    hint: 'Use the n-th term formula of arithmetic sequence Un = a + (n-1)b.'
+  },
+  'ARI-SMP-02': {
+    question: 'A merchant buys a bicycle for Rp800,000.00 and then sells it with a 15% profit. The selling price of the bicycle is...',
+    options: ['Rp920,000.00', 'Rp900,000.00', 'Rp950,000.00', 'Rp880,000.00'],
+    explanation: 'Profit amount = 15% × Rp800,000 = Rp120,000. Selling price = Buying price + Profit = Rp800,000 + Rp120,000 = Rp920,000.00.',
+    conceptTag: 'Social Arithmetic Profit Percentage (Middle School)',
+    hint: 'Calculate the profit value in rupiah first, then add it to the buying price.'
+  },
+  'ARI-SMP-03': {
+    question: 'The result of the exponentiation operation 2⁻³ + 4⁻¹ is...',
+    options: ['3/8', '1/8', '1/4', '5/8'],
+    explanation: '2⁻³ = 1/2³ = 1/8. 4⁻¹ = 1/4 = 2/8. So 1/8 + 2/8 = 3/8.',
+    conceptTag: 'Negative Exponents and Fractions (Middle School)',
+    hint: 'Remember the negative exponent formula: a^(-n) = 1/(a^n).'
+  },
+  'ARI-SD-01': {
+    question: 'The result of the fraction operation 2/3 + 1/4 is...',
+    options: ['11/12', '3/7', '3/12', '9/12'],
+    explanation: 'Equalize denominators using LCM(3, 4) = 12: 2/3 = 8/12 and 1/4 = 3/12. So 8/12 + 3/12 = 11/12.',
+    conceptTag: 'Different Denominator Fraction Addition (Elementary)',
+    hint: 'Equalize the denominators of both fractions first using LCM.'
+  },
+  'ARI-SD-02': {
+    question: 'The Greatest Common Divisor (GCD) of the numbers 24 and 36 is...',
+    options: ['12', '6', '8', '18'],
+    explanation: 'Prime factorization: 24 = 2³ × 3; 36 = 2² × 3². GCD = 2² × 3 = 4 × 3 = 12.',
+    conceptTag: 'GCD of Two Numbers (Elementary)',
+    hint: 'Take the common prime factors with the smallest exponent.'
+  },
+  'ARI-SD-03': {
+    question: 'The result of 45 + 15 × 3 - 20 is...',
+    options: ['70', '160', '80', '65'],
+    explanation: 'Prioritize multiplication: 15 × 3 = 45. Then addition and subtraction operations sequentially from the left: 45 + 45 - 20 = 90 - 20 = 70.',
+    conceptTag: 'Mixed Operations Sequence (Elementary)',
+    hint: 'Multiplication must be done first before addition and subtraction.'
   }
 };
