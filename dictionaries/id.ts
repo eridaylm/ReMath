@@ -628,10 +628,10 @@ export const id = {
       leaderboardBtn: "Lihat Papan Peringkat"
     },
     badges: {
-      mastered: "SMA Mastered (Fondasi Kuat)",
-      smp: "SMP Foundational Level (Perlu Review SMA)",
-      sd: "SD Foundational Level (Perlu Review SMP & SMA)",
-      remedial: "Needs Basic Remedial (Fondasi SD Perlu Dibangun)"
+      mastered: "Tuntas Level SMA (Fondasi Kuat)",
+      smp: "Level Fondasi SMP (Perlu Review SMA)",
+      sd: "Level Fondasi SD (Perlu Review SMP & SMA)",
+      remedial: "Perlu Remedial Dasar (Bangun Fondasi SD)"
     }
   }
 };

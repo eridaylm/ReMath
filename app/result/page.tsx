@@ -574,7 +574,7 @@ export default function ResultPage() {
                   {dict.resultPage.roadmap.step1Title}
                 </h4>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
-                  {dict.resultPage.roadmap.step1Desc} <span className="font-semibold text-rose-600">Needs Remedial</span> {language === 'en' ? 'or' : 'atau'} <span className="font-semibold text-orange-600">SD Foundation</span> {dict.resultPage.roadmap.step1Desc2}
+                  {dict.resultPage.roadmap.step1Desc} <span className="font-semibold text-rose-600">{language === 'en' ? 'Needs Remedial' : 'Perlu Remedial Dasar'}</span> {language === 'en' ? 'or' : 'atau'} <span className="font-semibold text-orange-600">{language === 'en' ? 'SD Foundation' : 'Level Fondasi SD'}</span> {dict.resultPage.roadmap.step1Desc2}
                 </p>
               </div>
 
@@ -600,7 +600,7 @@ export default function ResultPage() {
                   {dict.resultPage.roadmap.step3Title}
                 </h4>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
-                  {dict.resultPage.roadmap.step3Desc} <span className="font-semibold text-emerald-600">SMA Mastered</span> {dict.resultPage.roadmap.step3Desc2}
+                  {dict.resultPage.roadmap.step3Desc} <span className="font-semibold text-emerald-600">{language === 'en' ? 'SMA Mastered' : 'Tuntas Level SMA'}</span> {dict.resultPage.roadmap.step3Desc2}
                 </p>
               </div>
             </div>
