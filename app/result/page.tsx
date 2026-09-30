@@ -427,14 +427,14 @@ export default function ResultPage() {
                             </div>
                             <span
                               className={`rounded px-2 py-0.5 text-[10px] font-bold ${
-                                res.recommendation.priority === 'Tinggi' || res.recommendation.priority === 'High'
+                                res.recommendation.priority === 'Tinggi'
                                   ? 'bg-rose-100 text-rose-700'
-                                  : res.recommendation.priority === 'Sedang' || res.recommendation.priority === 'Medium'
+                                  : res.recommendation.priority === 'Sedang'
                                   ? 'bg-amber-100 text-amber-700'
                                   : 'bg-emerald-100 text-emerald-700'
                               }`}
                             >
-                              {dict.resultPage.skillTree.priority} {res.recommendation.priority === 'Tinggi' ? dict.resultPage.skillTree.priorityHigh : res.recommendation.priority === 'Sedang' ? dict.resultPage.skillTree.priorityMedium : res.recommendation.priority === 'Rendah' ? dict.resultPage.skillTree.priorityLow : res.recommendation.priority}
+                              {dict.resultPage.skillTree.priority} {res.recommendation.priority === 'Tinggi' ? dict.resultPage.skillTree.priorityHigh : res.recommendation.priority === 'Sedang' ? dict.resultPage.skillTree.priorityMedium : dict.resultPage.skillTree.priorityLow}
                             </span>
                           </div>
 
