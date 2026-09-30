@@ -137,6 +137,66 @@ export default function ResultPage() {
   const sdCount = resultsList.filter((r) => r.status === 'SD_FOUNDATIONAL').length;
   const remedialCount = resultsList.filter((r) => r.status === 'BASIC_REMEDIAL').length;
 
+  const strengthStr = dict.testPage.subtopics[result.supportiveHeader.keyStrengthSubtopic as keyof typeof dict.testPage.subtopics] || result.supportiveHeader.keyStrengthSubtopic;
+  const focusStr = dict.testPage.subtopics[result.supportiveHeader.focusGrowthSubtopic as keyof typeof dict.testPage.subtopics] || result.supportiveHeader.focusGrowthSubtopic;
+
+  let dynHeadline = language === 'en' 
+    ? `An honest and brave first step! We found the best starting point for you to soar.`
+    : `Langkah awal yang jujur dan berani! Kita telah menemukan titik mulai terbaik untukmu melesat.`;
+  let dynMotivational = language === 'en'
+    ? `Math is like climbing a staircase. Reviewing foundations at the basic level is not a weakness, but an acceleration for the next big leap!`
+    : `Matematika itu seperti menaiki anak tangga. Mengulang fondasi di tingkat dasar bukanlah kelemahan, melainkan akselerasi untuk lompatan besar berikutnya!`;
+
+  if (masteredCount >= 3) {
+    dynHeadline = language === 'en'
+      ? `Outstanding Performance! You have mastered most of the high school math pillars.`
+      : `Performa Luar Biasa! Sebagian besar pilar matematika SMA telah kamu kuasai.`;
+    dynMotivational = language === 'en'
+      ? `Your strong foundation in ${strengthStr} proves you are ready for advanced questions. Just a little polish needed in ${focusStr}.`
+      : `Fondasi kuatmu di ${strengthStr} membuktikan kamu siap melangkah ke soal-soal tingkat lanjut. Tinggal sedikit memoles materi ${focusStr}.`;
+  } else if (masteredCount + smpCount >= 3) {
+    dynHeadline = language === 'en'
+      ? `Great potential! Your middle school foundation is solid, time to level up.`
+      : `Potensi yang luar biasa! Fondasi SMP-mu sudah cukup solid, saatnya melangkah lebih jauh.`;
+    dynMotivational = language === 'en'
+      ? `You are very close to high school standards. We will focus on filling the small gaps in ${focusStr} so you can accelerate in ${strengthStr}.`
+      : `Kamu sudah sangat dekat dengan standar SMA. Kita akan fokus menambal celah kecil di ${focusStr} agar kamu bisa melesat di materi ${strengthStr}.`;
+  }
+
+  const getDynamicBadgeText = (badgeId: string, honestyCount: number, strengthName: string) => {
+    switch (badgeId) {
+      case 'b-honesty':
+        return {
+          title: language === 'en' ? 'Proven Honesty (Golden Integrity)' : 'Kejujuran Teruji (Integritas Emas)',
+          description: language === 'en' 
+            ? `You used the "I Don't Know" button ${honestyCount} times without randomly guessing. This is a sign of a true learner!`
+            : `Kamu menggunakan tombol "Belum Mempelajari Ini" sebanyak ${honestyCount} kali tanpa menebak sembarangan. Ini tanda pembelajar sejati!`
+        };
+      case 'b-speed':
+        return {
+          title: language === 'en' ? 'Quick & Agile Thinker' : 'Pemikir Cepat & Tangkas',
+          description: language === 'en'
+            ? 'Completed the entire adaptive diagnostic block with very high time efficiency.'
+            : 'Menyelesaikan seluruh blok diagnostik adaptif dengan efisiensi waktu sangat tinggi.'
+        };
+      case 'b-mastery':
+        return {
+          title: language === 'en' ? 'High School Master' : 'Penguasa Materi SMA',
+          description: language === 'en'
+            ? `Successfully completed the High School block in ${strengthName} with brilliant accuracy.`
+            : `Berhasil menuntaskan blok SMA pada topik ${strengthName} dengan akurasi gemilang.`
+        };
+      case 'b-growth':
+        return {
+          title: language === 'en' ? 'Growth Mindset' : 'Mindset Bertumbuh',
+          description: language === 'en'
+            ? 'Completed the adaptive diagnostic test fearlessly to uncover your true foundation.'
+            : 'Menyelesaikan tes diagnostik adaptif tanpa rasa takut demi mengetahui fondasi diri yang sebenarnya.'
+        };
+      default: return { title: '', description: '' };
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 print:bg-white print:text-black">
       <div className="print:hidden">
@@ -198,10 +258,10 @@ export default function ResultPage() {
                   <span>{dict.resultPage.supportiveHeader.holisticApproach}</span>
                 </div>
                 <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-snug">
-                  {result.supportiveHeader.strengthHeadline}
+                  {dynHeadline}
                 </h1>
                 <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  {result.supportiveHeader.motivationalText}
+                  {dynMotivational}
                 </p>
 
                 <div className="mt-5 flex flex-wrap items-center gap-2 text-xs">
@@ -309,24 +369,27 @@ export default function ResultPage() {
                 <span>{dict.resultPage.badgesEarned}</span>
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                {result.badges.map((b) => (
-                  <div
-                    key={b.id}
-                    className="flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50/60 p-3 dark:border-slate-800 dark:bg-slate-800/40"
-                  >
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400">
-                      <Award className="h-5 w-5" />
+                {result.badges.map((b) => {
+                  const dynamicBadge = getDynamicBadgeText(b.id, result.totalHonestyCount, strengthStr);
+                  return (
+                    <div
+                      key={b.id}
+                      className="flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50/60 p-3 dark:border-slate-800 dark:bg-slate-800/40"
+                    >
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400">
+                        <Award className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <span className="font-bold text-xs text-slate-900 dark:text-white block">
+                          {dynamicBadge.title || b.title}
+                        </span>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
+                          {dynamicBadge.description || b.description}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <span className="font-bold text-xs text-slate-900 dark:text-white block">
-                        {b.title}
-                      </span>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
-                        {b.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
