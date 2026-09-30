@@ -2,7 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 
-const containerVariants: Variants = {
+const containerVariants: any = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -13,7 +13,7 @@ const containerVariants: Variants = {
   },
 };
 
-const itemVariants: Variants = {
+const itemVariants: any = {
   hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
