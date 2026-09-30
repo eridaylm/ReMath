@@ -10,6 +10,7 @@ import { useLanguage } from '@/contexts/language-context';
 import { useTest } from '@/context/TestContext';
 import { SubTopic, SubTopicResult, MasteryStatus } from '@/types';
 import { SUBTOPICS_SEQUENCE } from '@/data/mockData';
+import { ROOT_CAUSE_MAP_EN } from '@/data/mockDataEn';
 import {
   Sparkles,
   ShieldCheck,
@@ -360,17 +361,19 @@ export default function ResultPage() {
                     >
                       <div className="flex items-center gap-3.5">
                         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 font-bold text-sm dark:bg-blue-950/80 dark:text-blue-400 shadow-inner">
-                          {res.subtopic.slice(0, 3)}
+                          {(dict.testPage.subtopics[res.subtopic as keyof typeof dict.testPage.subtopics] || res.subtopic).slice(0, 3)}
                         </div>
                         <div>
                           <div className="flex items-center gap-2">
                             <span className="text-base font-bold text-slate-900 dark:text-white">
-                              {res.subtopic}
+                              {dict.testPage.subtopics[res.subtopic as keyof typeof dict.testPage.subtopics] || res.subtopic}
                             </span>
                             {getStatusBadge(res.status)}
                           </div>
                           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">
-                            {res.rootCauseAnalysis.title}
+                            {language === 'en' && ROOT_CAUSE_MAP_EN[res.subtopic]?.[res.status]?.title 
+                              ? ROOT_CAUSE_MAP_EN[res.subtopic][res.status].title 
+                              : res.rootCauseAnalysis.title}
                           </p>
                         </div>
                       </div>
@@ -408,11 +411,15 @@ export default function ResultPage() {
                                 {dict.resultPage.skillTree.rootCauseTitle}
                               </h4>
                               <p className="mt-1 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
-                                {res.rootCauseAnalysis.description}
+                                {language === 'en' && ROOT_CAUSE_MAP_EN[res.subtopic]?.[res.status]?.description
+                                  ? ROOT_CAUSE_MAP_EN[res.subtopic][res.status].description
+                                  : res.rootCauseAnalysis.description}
                               </p>
                               <div className="mt-2.5 flex items-baseline gap-1.5 text-xs text-amber-900 dark:text-amber-200 font-medium">
                                 <span className="font-bold">{dict.resultPage.skillTree.keyPrerequisite}</span>
-                                <span>{res.rootCauseAnalysis.missingPrerequisite}</span>
+                                <span>{language === 'en' && ROOT_CAUSE_MAP_EN[res.subtopic]?.[res.status]?.missingPrerequisite
+                                  ? ROOT_CAUSE_MAP_EN[res.subtopic][res.status].missingPrerequisite
+                                  : res.rootCauseAnalysis.missingPrerequisite}</span>
                               </div>
                             </div>
                           </div>
@@ -423,7 +430,7 @@ export default function ResultPage() {
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-2 text-xs font-bold text-slate-800 dark:text-slate-200">
                               <BookOpen className="h-4 w-4 text-blue-600" />
-                              <span>{res.recommendation.actionTitle}</span>
+                              <span>{language === 'en' ? `Conceptual Recovery Recommendation for ${res.subtopic}` : res.recommendation.actionTitle}</span>
                             </div>
                             <span
                               className={`rounded px-2 py-0.5 text-[10px] font-bold ${
@@ -443,7 +450,9 @@ export default function ResultPage() {
                           </p>
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            {res.recommendation.learningModules.map((moduleName, mIdx) => (
+                            {(language === 'en' && ROOT_CAUSE_MAP_EN[res.subtopic]?.[res.status]?.modules
+                              ? ROOT_CAUSE_MAP_EN[res.subtopic][res.status].modules
+                              : res.recommendation.learningModules).map((moduleName: string, mIdx: number) => (
                               <div
                                 key={mIdx}
                                 className="flex items-center gap-2 rounded-lg border border-slate-100 bg-slate-50 p-2 text-xs font-medium text-slate-700 dark:border-slate-700/60 dark:bg-slate-800 dark:text-slate-200"
